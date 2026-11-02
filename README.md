@@ -6,9 +6,9 @@ The hybrid XGBoost model predicts departures from a realization-specific hypsome
 
 ## Default manuscript evaluation
 
-All performance calculations use **1,754 test glaciers**, excluding **RGI60-14.17287** and its five realizations: 1,422 Western and 332 Eastern glaciers, 8,770 glacier-realizations, and 2,540,722 target instances per method. No exclusion flag is needed.
+All performance calculations use **1,754 test glaciers**: 1,422 Western and 332 Eastern glaciers, 8,770 glacier-realizations, and 2,540,722 target instances per method. No exclusion flag is needed.
 
-`config/evaluation.json` defines this selection. `data/metadata/splits/evaluation_split.json` is the default workflow split. The original fitting assignments remain in `training_split.json`: 8,179 training, 1,751 validation, and 1,755 assigned test glaciers. The exclusion affects evaluation, not fitting or the stored predictions. Figure 1 maps the full study population; the reproduction script supplies the fitting split for that map explicitly.
+`config/evaluation.json` defines this selection. `data/metadata/splits/evaluation_split.json` is the default workflow split. The original fitting assignments remain in `training_split.json`: 8,179 training, 1,751 validation, and 1,755 assigned test glaciers. The exclusion affects evaluation, not fitting or the stored predictions. Figure 1 maps the full study population; the reproduction script explicitly provides the fitting split for that map.
 
 The stored hybrid uses 25 predictors and 172 trees. Combined glacier-wide specific MAE is 0.0515 m a⁻¹ versus 0.0639 for hypsometric filling, a 19.4% reduction. The post hoc exclusion changes the sign of the integrated-RMSE comparison; see `MODEL_CARD.md`.
 
