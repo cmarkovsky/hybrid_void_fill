@@ -1,0 +1,24 @@
+\begin{table}[!htbp]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\caption{Glacier-balanced pixel reconstruction errors on identical withheld targets (m a$^{-1}$). Each glacier receives equal total weight, divided equally among its realizations and then their target pixels. Bias is predicted minus reference elevation-change rate. Western and Eastern counts are 2,130,058 and 410,664 target instances.}
+\label{tab:pixel}
+\begin{tabular}{llrrrr}
+\toprule
+Region & Method & MAE & RMSE & NMAD & Bias \\
+\midrule
+Western & Constant & $0.265$ & $0.372$ & $0.279$ & $-0.0961$ \\
+ & Hypsometric & $0.249$ & $0.388$ & $0.246$ & {\boldmath$+0.00470$} \\
+ & Hybrid & {\boldmath$0.208$} & {\boldmath$0.310$} & {\boldmath$0.214$} & $-0.00982$ \\
+\midrule
+Eastern & Constant & $0.367$ & $0.517$ & $0.390$ & $-0.0835$ \\
+ & Hypsometric & $0.353$ & $0.524$ & $0.360$ & {\boldmath$+0.00977$} \\
+ & Hybrid & {\boldmath$0.301$} & {\boldmath$0.446$} & {\boldmath$0.305$} & $+0.0466$ \\
+\midrule
+Combined & Constant & $0.284$ & $0.403$ & $0.296$ & $-0.0937$ \\
+ & Hypsometric & $0.269$ & $0.417$ & $0.264$ & $+0.00566$ \\
+ & Hybrid & {\boldmath$0.226$} & {\boldmath$0.340$} & {\boldmath$0.228$} & {\boldmath$+0.000864$} \\
+\bottomrule
+\end{tabular}
+\belowtable{Evaluation excludes RGI60-14.17287 and its five realizations. Western, Eastern, and combined counts are 1,422, 332, and 1,754 glaciers. Values are rounded to three significant figures. Bold identifies the lowest error metric and the bias closest to zero within each population, using unrounded values.}
+\end{table}

@@ -1,0 +1,24 @@
+\begin{table}[!htbp]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\caption{Regional-transfer performance on common test targets. Glacier MAE and signed bias are in m a$^{-1}$. Integrated RMSE describes per-glacier volume-rate errors in m$^3$ a$^{-1}$. Each regional hybrid uses 1,000 source glaciers. The full-data hybrid uses all 8,179 training glaciers from both regions.}
+\label{tab:transfer}
+\begin{tabular}{llrrr}
+\toprule
+Target & Model & Glacier MAE & Bias & Integrated RMSE \\
+\midrule
+Western & Constant & $0.0721$ & $-0.0357$ & $3.81\times10^{5}$ \\
+ & Hypsometric & $0.0601$ & $+0.00223$ & $2.17\times10^{5}$ \\
+ & Hybrid (full data) & {\boldmath$0.0480$} & $-0.00333$ & $2.04\times10^{5}$ \\
+ & Hybrid (Western-trained) & $0.0488$ & {\boldmath$+0.00121$} & {\boldmath$1.55\times10^{5}$} \\
+ & Hybrid (Eastern-trained) & $0.0571$ & $-0.0280$ & $2.67\times10^{5}$ \\
+\midrule
+Eastern & Constant & $0.0927$ & $-0.0303$ & $1.84\times10^{5}$ \\
+ & Hypsometric & $0.0802$ & $+0.00423$ & $9.95\times10^{4}$ \\
+ & Hybrid (full data) & $0.0666$ & $+0.0182$ & $8.98\times10^{4}$ \\
+ & Hybrid (Western-trained) & $0.0737$ & $+0.0358$ & {\boldmath$8.78\times10^{4}$} \\
+ & Hybrid (Eastern-trained) & {\boldmath$0.0665$} & {\boldmath$-0.00343$} & $9.02\times10^{4}$ \\
+\bottomrule
+\end{tabular}
+\belowtable{Evaluation excludes RGI60-14.17287 and its five realizations. Western, Eastern, and combined counts are 1,422, 332, and 1,754 glaciers. Values are rounded to three significant figures. Bold identifies the lowest error metric and the bias closest to zero within each population, using unrounded values.}
+\end{table}

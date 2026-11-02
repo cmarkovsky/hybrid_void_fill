@@ -1,0 +1,63 @@
+\begin{table*}[t]
+\caption{Predictors used in the hybrid XGBoost model. The model uses nine static glacier and terrain predictors and 16 additional predictors describing the hypsometric baseline, elevation, and observations remaining in each realization.}
+\label{tab:features}
+\centering
+\small
+\begin{tabular}{p{0.22\textwidth}p{0.29\textwidth}p{0.40\textwidth}}
+\tophline
+Description & Variable(s) & Description \\
+\middlehline
+\multicolumn{3}{l}{Static glacier and terrain predictors (9)} \\
+\middlehline
+\rowcolor[gray]{0.94}
+Elevation & $z$ & Pixel DEM elevation (m). \\
+
+Slope & $slope$ & Pixel slope calculated using the Horn operator (degrees). \\
+
+\rowcolor[gray]{0.94}
+Aspect components & $aspect_{\sin}$, $aspect_{\cos}$ & Sine and cosine of pixel aspect; dimensionless. \\
+
+Glacier area & $Area_g$ & Inventory glacier area (km$^2$). \\
+
+\rowcolor[gray]{0.94}
+Inventory elevations & $Zmin_g$, $Zmed_g$, $Zmax_g$ & Minimum, median, and maximum glacier elevation (m). \\
+
+Hypsometric index & $HI_g$ & Inventory-derived hypsometric index; dimensionless. \\
+\middlehline
+\multicolumn{3}{l}{Additional predictors (16)} \\
+\middlehline
+\rowcolor[gray]{0.94}
+Hypsometric estimate & $hyp$ & Realization-specific estimate $\widehat y^{\mathrm{hyp}}$ (m a$^{-1}$). \\
+
+Normalized elevation &$z_{norm}$ & $(z-Z_{\mathrm{min}})/(Z_{\mathrm{max}}-Z_{\mathrm{min}})$, using inventory elevation limits. \\
+\rowcolor[gray]{0.94}
+Band source count & $band\_count$ & Number of observed source pixels in the target elevation bin. \\
+
+Band source fraction & $band\_frac$ & Source count divided by the number of glacier pixels with finite elevation in that bin. \\
+\rowcolor[gray]{0.94}
+Band variability & $band\_std$ & Sample standard deviation of observed source values in the bin (m a$^{-1}$). \\
+
+Empty band & $band\_empty$ & Indicator that the bin contains no observed source pixels. \\
+
+\rowcolor[gray]{0.94}
+Outside observed elevations & $out\_obs\_z$ & Indicator that target elevation lies outside the observed source elevation range. \\
+
+Nearest occupied band & $nearest\_band\_dz$ & Elevation difference to the nearest occupied bin center (m). \\
+
+\rowcolor[gray]{0.94}
+Observed elevation span & $\textit{obs\_span\_frac}$ & Observed source elevation range divided by the elevation range of glacier pixels with finite elevation. \\
+
+Void fraction & $void\_frac$ & Fraction of glacier pixels with finite elevation that lie within the artificial-void mask. \\
+
+\rowcolor[gray]{0.94}
+Band-fill indicators & \textit{mode\_none}, \textit{mode\_cubic}, \textit{mode\_linear} & Three binary indicators identifying the hypsometric missing-bin rule. \\
+
+Nearest observation & \textit{nearest\_source\_m} & Distance to the nearest observed source pixel (m), without the 900 m cutoff. \\
+
+\rowcolor[gray]{0.94}
+Local source count & \textit{local\_count} & Number of selected source pixels strictly within 900 m, capped at 32. \\
+
+Local hypsometric departure & \textit{local\_residual} & Distance-weighted mean source departure, $L$ (m a$^{-1}$). \\
+\bottomhline
+\end{tabular}
+\end{table*}

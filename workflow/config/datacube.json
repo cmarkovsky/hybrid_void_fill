@@ -1,0 +1,56 @@
+{
+  "description": "Datacube rebuild on the native 30 m Shean dh/dt lattice. Paths are project-root relative unless absolute.",
+  "work_dir": "derived/cube_build",
+  "output": "derived/hma_cube_aligned.zarr",
+  "grid": {
+    "anchor": "dhdt",
+    "resolution_m": 30.0,
+    "extent_from": "raw/study_outlines/hma_rgi_ltg_filt.shp",
+    "buffer_m": 3000
+  },
+  "glaciers": {
+    "outlines": "raw/study_outlines/hma_rgi_ltg_filt.shp",
+    "id_field": "RGIId",
+    "all_touched": false
+  },
+  "layers": {
+    "dhdt": {
+      "source": "raw/shean_2020/shean_hma_glacier_ASTER_WV_2000-2018_dhdt.tif",
+      "resampling": "nearest",
+      "require_lattice": true,
+      "nodata": -9999.0,
+      "valid_range": [
+        -60.0,
+        60.0
+      ],
+      "out_of_range": "nan",
+      "out_of_range_note": "Raw mosaic has ~254 |dh/dt| > 60 m/yr artifacts, all outside RGI outlines; frozen cube had NaN there.",
+      "units": "m yr-1",
+      "long_name": "Glacier surface elevation change rate 2000-2018 (Shean et al. 2020)"
+    },
+    "z": {
+      "source": "raw/copernicus_glo30",
+      "resampling": "bilinear",
+      "require_lattice": false,
+      "nodata": null,
+      "valid_range": [
+        -500.0,
+        9000.0
+      ],
+      "glacier_masked": false,
+      "units": "m",
+      "long_name": "Surface elevation (Copernicus GLO-30 DSM, EGM2008 heights), bilinear-warped to the 30 m lattice",
+      "source_note": "41 Copernicus GLO-30 COG tiles; acquisition details are in the data archive."
+    }
+  },
+  "terrain": {
+    "from": "z",
+    "method": "horn",
+    "units": {
+      "slope": "degree",
+      "aspect": "degree clockwise from grid north (downslope azimuth)"
+    }
+  },
+  "chunk_size": 2048,
+  "strip_rows": 2048
+}

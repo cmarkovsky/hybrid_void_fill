@@ -1,0 +1,28 @@
+excluded,scope,metric,contrast,estimate,ci_low,ci_high
+True,whim,glacier_mae,coords_off - coords_on_absolute,0.0006048628723481,9.531888851262682e-06,0.0012765336032151
+True,whim,glacier_rmse,coords_off - coords_on_absolute,0.0007144684049337,-0.0003110500933779,0.00179191528345
+True,whim,glacier_bias,|bias coords_off| - |bias coords_on_absolute|,0.0087981957781771,0.0033884591906076,0.0095031956610878
+True,whim,pixel_mae,coords_off - coords_on_absolute,0.0008859934694375,-0.000143979760195,0.0020729207299703
+True,whim,pixel_rmse,coords_off - coords_on_absolute,0.0015779270045442,-0.0001081557705417,0.0035023883817834
+True,whim,pixel_bias,|bias coords_off| - |bias coords_on_absolute|,0.0233919596338508,0.0112434697791281,0.0252347814594786
+True,whim,integrated_mae,coords_off - coords_on_absolute,341.35837089784036,-68.07514186123888,827.4556679661187
+True,whim,integrated_rmse,coords_off - coords_on_absolute,51.922681728494354,-546.2667755921648,1947.089121135726
+True,whim,integrated_bias,|bias coords_off| - |bias coords_on_absolute|,-1986.3392621699825,-5792.221713457696,5334.878024303392
+True,ehim,glacier_mae,coords_off - coords_on_absolute,0.0009716596211995,0.0001955442127556,0.0020338534344421
+True,ehim,glacier_rmse,coords_off - coords_on_absolute,0.002287228775697,0.0010781201422846,0.0038755191400382
+True,ehim,glacier_bias,|bias coords_off| - |bias coords_on_absolute|,0.0063739983298421,-0.0048544255986783,0.00946866680312
+True,ehim,pixel_mae,coords_off - coords_on_absolute,0.0024521313667641,0.0011585223892391,0.0039429178390939
+True,ehim,pixel_rmse,coords_off - coords_on_absolute,0.0039314034139835,0.0019508077165115,0.0061447077609773
+True,ehim,pixel_bias,|bias coords_off| - |bias coords_on_absolute|,0.0174602968427781,-0.0143501978383071,0.0258480102740739
+True,ehim,integrated_mae,coords_off - coords_on_absolute,54.870525877813634,-906.0126052341168,1247.4076236778935
+True,ehim,integrated_rmse,coords_off - coords_on_absolute,215.0091055570374,-3553.2346504907873,5618.601600493881
+True,ehim,integrated_bias,|bias coords_off| - |bias coords_on_absolute|,-3827.4615817548233,-4445.299213091295,5932.333272238989
+True,combined,glacier_mae,coords_off - coords_on_absolute,0.0006742907632367,0.000157904685385,0.0012457863400602
+True,combined,glacier_rmse,coords_off - coords_on_absolute,0.0010699325070753,0.0001589907090561,0.0019933140372417
+True,combined,glacier_bias,|bias coords_off| - |bias coords_on_absolute|,0.0059263779652567,0.0001930895241476,0.0075081835134274
+True,combined,pixel_mae,coords_off - coords_on_absolute,0.0011824346221812,0.0002623699806247,0.0021962393571856
+True,combined,pixel_rmse,coords_off - coords_on_absolute,0.0021362777409759,0.0006430543263246,0.0037573481373597
+True,combined,pixel_bias,|bias coords_off| - |bias coords_on_absolute|,0.0156593774501331,0.0028741903904323,0.019962214943322
+True,combined,integrated_mae,coords_off - coords_on_absolute,287.13148119051766,-108.93029766534892,753.1323212908048
+True,combined,integrated_rmse,coords_off - coords_on_absolute,66.46680817758897,-627.600026346519,1734.0503485089955
+True,combined,integrated_bias,|bias coords_off| - |bias coords_on_absolute|,-569.4769687961764,-4534.265541596833,4139.976671340855

@@ -1,0 +1,3 @@
+target,contrast,estimate,ci_low,ci_high
+whim,cross_minus_same_glacier_mae,0.0082704510142674,0.0058014635185065,0.0104062417565723
+ehim,cross_minus_same_glacier_mae,0.0071789698236496,0.0021733747501907,0.0103656224993212

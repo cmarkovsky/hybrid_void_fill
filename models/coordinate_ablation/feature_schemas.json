@@ -1,0 +1,81 @@
+{
+ "coords_off": {
+  "n": 25,
+  "features": [
+   "z",
+   "slope",
+   "sinaspect",
+   "cosaspect",
+   "g_Area",
+   "g_Zmin",
+   "g_Zmed",
+   "g_Zmax",
+   "g_HI",
+   "hyp",
+   "normalized_z",
+   "band_count",
+   "band_fraction",
+   "band_std",
+   "band_empty",
+   "outside_observed_z",
+   "nearest_band_dz",
+   "observed_span_fraction",
+   "void_fraction",
+   "mode_none",
+   "mode_cubic",
+   "mode_linear",
+   "nearest_source_m",
+   "local_count",
+   "local_residual"
+  ]
+ },
+ "coords_on_absolute": {
+  "n": 27,
+  "features": [
+   "z",
+   "slope",
+   "sinaspect",
+   "cosaspect",
+   "g_Area",
+   "g_Zmin",
+   "g_Zmed",
+   "g_Zmax",
+   "g_HI",
+   "hyp",
+   "normalized_z",
+   "band_count",
+   "band_fraction",
+   "band_std",
+   "band_empty",
+   "outside_observed_z",
+   "nearest_band_dz",
+   "observed_span_fraction",
+   "void_fraction",
+   "mode_none",
+   "mode_cubic",
+   "mode_linear",
+   "nearest_source_m",
+   "local_count",
+   "local_residual",
+   "easting_m",
+   "northing_m"
+  ],
+  "added": {
+   "easting_m": "pixel-centre x, cube Albers CRS, metres, raw",
+   "northing_m": "pixel-centre y, cube Albers CRS, metres, raw"
+  }
+ },
+ "excluded": [
+  "lat",
+  "lon",
+  "x",
+  "x_coord",
+  "x_rel",
+  "y",
+  "y_coord",
+  "y_rel",
+  "glacier id",
+  "realization id",
+  "debris"
+ ]
+}

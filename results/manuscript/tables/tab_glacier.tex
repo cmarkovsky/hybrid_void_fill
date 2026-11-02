@@ -1,0 +1,24 @@
+\begin{table}[!htbp]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\caption{Glacier-wide specific reconstruction errors over valid reference-data area (m a$^{-1}$). Absolute, squared, and signed errors are averaged over realizations and then equally over glaciers to calculate MAE, RMSE, and bias. RMSE is the square root of the averaged squared error. NMAD is calculated across glacier-mean signed errors.}
+\label{tab:glacier}
+\begin{tabular}{llrrrr}
+\toprule
+Region & Method & MAE & RMSE & NMAD & Bias \\
+\midrule
+Western & Constant & $0.0721$ & $0.101$ & $0.0614$ & $-0.0357$ \\
+ & Hypsometric & $0.0601$ & $0.0942$ & $0.0410$ & {\boldmath$+0.00223$} \\
+ & Hybrid & {\boldmath$0.0480$} & {\boldmath$0.0713$} & {\boldmath$0.0371$} & $-0.00333$ \\
+\midrule
+Eastern & Constant & $0.0927$ & $0.125$ & $0.0852$ & $-0.0303$ \\
+ & Hypsometric & $0.0802$ & $0.116$ & $0.0557$ & {\boldmath$+0.00423$} \\
+ & Hybrid & {\boldmath$0.0666$} & {\boldmath$0.0961$} & {\boldmath$0.0466$} & $+0.0182$ \\
+\midrule
+Combined & Constant & $0.0760$ & $0.106$ & $0.0660$ & $-0.0347$ \\
+ & Hypsometric & $0.0639$ & $0.0987$ & $0.0432$ & $+0.00261$ \\
+ & Hybrid & {\boldmath$0.0515$} & {\boldmath$0.0766$} & {\boldmath$0.0385$} & {\boldmath$+0.000741$} \\
+\bottomrule
+\end{tabular}
+\belowtable{Evaluation excludes RGI60-14.17287 and its five realizations. Western, Eastern, and combined counts are 1,422, 332, and 1,754 glaciers. Values are rounded to three significant figures. Bold identifies the lowest error metric and the bias closest to zero within each population, using unrounded values.}
+\end{table}

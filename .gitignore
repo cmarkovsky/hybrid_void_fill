@@ -1,0 +1,30 @@
+# Separate data archive and local/generated outputs
+/data_archive/
+/reproduced/
+/config/data_root.json
+*.zarr/
+*.npz
+*.parquet
+*.tif
+*.tif.aux.xml
+*.zip
+
+# Python and local tools
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+*.swp
+
+# Manuscript build products and separately installed journal class
+/manuscript/**/*.aux
+/manuscript/**/*.log
+/manuscript/**/*.out
+/manuscript/**/*.synctex.gz
+/manuscript/**/*.fls
+/manuscript/**/*.fdb_latexmk
+/manuscript/**/copernicus.cls
+/manuscript/**/copernicus.cfg
+/manuscript/**/copernicus.bst

@@ -1,0 +1,55 @@
+{
+  "name": "manuscript",
+  "description": "The single evaluation selection used for every manuscript test-performance table, interval and figure. Training and validation memberships are not affected.",
+  "production_split": "data/metadata/splits/training_split.json",
+  "evaluated_group": "test",
+  "exclusions": "data/metadata/evaluation_exclusions.json",
+  "derived_membership_csv": "data/metadata/evaluation_membership.csv",
+  "derived_membership_split_format": "data/metadata/splits/evaluation_split.json",
+  "expected": {
+    "test_glaciers": {
+      "whim": 1422,
+      "ehim": 332,
+      "all": 1754
+    },
+    "glacier_realizations": 8770,
+    "targets_per_method": {
+      "whim": 2130058,
+      "ehim": 410664,
+      "all": 2540722
+    }
+  },
+  "weighting": {
+    "pixel": "each glacier has unit weight, split equally across its realizations and then across target pixels in each realization",
+    "glacier_wide": "errors averaged over realizations within a glacier, then equally over glaciers",
+    "specific_error_support": "full valid reference support of the glacier (n_valid_glacier_pixels), not the void area",
+    "integrated_error": "per-glacier volume-rate error = specific error x valid reference area; no regional totals and no density conversion"
+  },
+  "bootstrap": {
+    "draws": 2000,
+    "main": {
+      "block_sizes_km": [
+        50,
+        100,
+        200
+      ],
+      "primary_block_size_km": 100,
+      "seed": 20260917,
+      "scheme": "np.random.SeedSequence([seed, block_size, family, region_code]) as in 05_spatial_block_bootstrap.py"
+    },
+    "coordinates": {
+      "seed": 20261019,
+      "block_size_km": 100,
+      "scheme": "one RNG used sequentially for Western then Eastern draws; combined interval is region-stratified"
+    },
+    "diagnostics_and_transfer": {
+      "seed": 20261018,
+      "block_size_km": 100
+    }
+  },
+  "display": {
+    "significant_figures": 3,
+    "percentages_from_unrounded_values": true,
+    "contrasts": "comparison minus baseline; coordinates off minus on; bias contrasts subtract magnitudes of means"
+  }
+}

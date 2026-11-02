@@ -1,0 +1,21 @@
+{
+  "description": "Input paths relative to --data-root. Archived asset names are retained exactly for compatibility with the supplied data archive.",
+  "paths": {
+    "reference_results": "runs/production_result_tree_1755/v3_excl_surge",
+    "reference_residuals": "predictions/common_targets/test_residuals_long_common_xy.parquet",
+    "reference_predictions": "predictions/common_targets/common_xy_point_predictions.parquet",
+    "sensitivity_metrics": "runs/reviewer_revision_20261019_surge/working_copy/metrics",
+    "coordinate_metrics": "runs/coordinate_ablation_20261019_v3/working_copy/metrics",
+    "transfer_predictions": "predictions/regional_transfer",
+    "coordinate_predictions": "predictions/coordinate_ablation",
+    "chips": "prepared/voids_aligned/chips",
+    "void_metadata": "prepared/voids_aligned/metadata/void_metadata_verified.parquet",
+    "attributes": "prepared/glacier_attributes/v4_native_missing_glacier_attributes.csv",
+    "frozen_release": "frozen_release/void262_v3_excl_surge_release_20261019T193533Z",
+    "study_outlines": "raw/study_outlines/hma_rgi_ltg_filt.shp",
+    "himap_regions": "raw/himap/himap_regions.gpkg",
+    "rows": "prepared/rows_context_v3_excl_surge",
+    "reconstruction_examples": "derived/manuscript_excluding_RGI60_14_17287/figure_A3_source",
+    "transfer_prediction_pattern": "predictions/regional_transfer/20261019_reviewer_revision_surge__source_{source}__target_{target}.npz"
+  }
+}

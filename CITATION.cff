@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying scientific manuscript when using this code or its results."
+title: "A hybrid hypsometric–machine learning approach for reconstructing glacier surface elevation change"
+type: software
+authors:
+  - family-names: Markovsky
+    given-names: Cameron
+  - family-names: Rupper
+    given-names: Summer
+  - family-names: Brewer
+    given-names: Simon
+  - family-names: Forster
+    given-names: Richard R.

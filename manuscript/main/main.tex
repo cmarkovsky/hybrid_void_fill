@@ -1,0 +1,292 @@
+\documentclass[tc,manuscript]{copernicus}
+\usepackage{tabularx,longtable,booktabs,placeins, colortbl}
+\usepackage{xr}\externaldocument[]{../supplement/supplement}
+\graphicspath{{../../figures/main/}{../../figures/supplement/}}
+\newcommand{\rate}{\ensuremath{\mathrm{m\,a^{-1}}}}
+\newcommand{\volrate}{\ensuremath{\mathrm{m^3\,a^{-1}}}}
+\newcommand{\dd}{\mathrm{d}}
+\begin{document}
+\title{A hybrid hypsometric--machine learning approach for reconstructing glacier surface elevation change}
+\Author[1][cameron.markovsky@utah.edu]{Cameron}{Markovsky}
+\Author[1]{Summer}{Rupper}
+\Author[1]{Simon}{Brewer}
+\Author[1]{Richard R.}{Forster}
+\affil[1]{School of Environment, Society, and Sustainability, University of Utah, Salt Lake City, UT, USA}
+\runningtitle{Reconstructing glacier surface elevation change}
+\runningauthor{C. Markovsky et al.}
+\received{}\pubdiscuss{}\revised{}\accepted{}\published{}
+\firstpage{1}
+\maketitle
+
+\begin{abstract}
+Glacier mass balance assessments in mountainous regions often rely on digital elevation model (DEM) differencing to estimate surface elevation change. However, DEMs derived from optical stereo imagery commonly contain spatial data voids, particularly in high-elevation accumulation zones where low surface contrast limits image matching. These voids require reconstruction of missing values and introduce uncertainty in glacier-change estimates. Here, we evaluate a hybrid approach that uses gradient-boosted tree regression (XGBoost) to predict departures from a realization-specific hypsometric estimate. Using a 30\,m elevation-change product for 2000--2018 derived from ASTER and WorldView/GeoEye observations, we compare constant, hypsometric, and hybrid filling across five contiguous, elevation-biased void realizations on each of 1,754 test glaciers in the Western and Eastern Himalaya. The hybrid reduces combined glacier-wide specific-error MAE from 0.0639 to 0.0515\,\rate\ (19.4\%) and reduces pixel MAE by 16.4\% in the west and 14.7\% in the east relative to hypsometric filling. Paired 95\% spatial-block intervals for regional glacier MAE contrasts are below zero, although glacier-wide specific absolute bias in the Eastern Himalaya increases relative to hypsometric filling. Regional-transfer and coordinate experiments demonstrate geographic sensitivity, while realization subsets show stable regional rankings but variable individual-glacier rankings. These results indicate that available observations around each void can improve mean absolute reconstruction accuracy beyond the elevation-bin mean.
+\end{abstract}
+
+\introduction[Introduction]  %% \introduction[modified heading if necessary]
+
+Estimating changes and temporal trends in regional ice mass is critical to understanding the impact of climate change on mountain glaciers. Mass balance assessments reveal how glaciers respond to past climate variations and inform projections of future changes. The remote and technical setting of many mountain glaciers has historically limited the collection of in situ and airborne data, particularly in regions such as High Mountain Asia and the Andes. This limited temporal coverage of historical observations often necessitates the use of satellite-based methods to estimate regional glacier mass balance. Geodetic glacier mass balance methods use maps of surface elevation change generated from digital elevation models (DEMs) acquired at different dates to calculate ice volume change over time, which can be converted to ice mass change by adjusting for density \citep{berthier2023, huss2013, bamber2007}. 
+
+While the complex, steep terrain surrounding mountain glaciers frequently poses challenges for collecting field measurements, it also complicates the generation of remotely sensed products. Spatial data gaps (hereafter referred to as “voids”) are common in many DEMs derived from remotely sensed data. Voids arise from limitations in stereophotogrammetric DEM generation over low-contrast areas, such as snow-covered surfaces, and from cloud, shadow, or terrain occlusion \citep{girod2017, hugonnet2022}. These voids are common in glacier accumulation zones and need to be accounted for before estimating ice mass change. ASTER DEM time series have been used to estimate glacier elevation and mass changes in Patagonia, the Cordillera Darwin and Juneau icefields, and across the Andes \citep{willis2012,melkonian2013,melkonian2014,dussaillant2018,dussaillant2019}. These modern satellite studies are distinct from reconstructions based on scanned historical film imagery. Although combining modern observations can increase spatial coverage, historical reconstructions often rely on fewer acquisitions. The approach used to fill missing values can therefore affect estimates of glacier volume change \citep{mcnabb2019}.
+
+
+Previous studies have examined the impact of different void-filling methodologies on glacier change estimates \citep[e.g.,][]{mcnabb2019, kaab2008, seehaus2020}. \citet{mcnabb2019} simulated voids using correlation masks from ASTER stereo processing and compared the resulting volume-change estimates with those obtained from complete reference DEMs. Their results support filling elevation differences rather than interpolating each DEM separately, and identify local hypsometric filling as a useful approach in the presence of noise. Here, we extend this comparison to repeated, contiguous, elevation-biased artificial voids across glaciers in two Himalayan regions, evaluating both pixel-level reconstruction and glacier-wide mean elevation-change rates.
+
+Many traditional void-filling methods fall into two major categories: constant and hypsometric methods \citep{arendt2002, huss2012}. Constant methods use a statistic such as the mean elevation change value of the available pixels on a glacier. Hypsometric methods quantify the relationship between elevation and surface elevation change and use this relationship as the basis for filling missing values. These methods can be applied locally to individual glaciers or across groups of glaciers using elevation-bin statistics or fitted curves. This study fills elevation-change rates, $\frac{dh}{dt}$, after their estimation, rather than filling individual DEMs prior to differencing. 
+
+Recent studies have demonstrated the use of machine learning algorithms for estimating parameters related to glacier mass balance \citep{bolibar2020, vandermeer2025}. Machine learning can integrate multiple variables and represent nonlinear relationships between elevation change and glacier-scale attributes. The problem of estimating glacier surface elevation change over voids is similar to estimating ice thickness from incomplete observations, for which gradient-boosted tree models have been used to integrate measurements with topographic and glacier-scale attributes \citep{maffezzoli2025}. Both applications use relationships between observed values and these attributes to estimate glacier properties where observations are unavailable. However, this flexibility alone does not guarantee increased reconstruction skill. Elevation-change products contain spatially correlated errors, and nearby training and test glaciers may share both physical patterns and measurement errors \citep{rolstad2009, hugonnet2022}. Glacier-level partitioning reduces within-glacier leakage but does not ensure spatial independence between groups. In addition, improved agreement with a noisy reference product is not equivalent to improved knowledge of the true elevation-change field.
+
+This study examines established void-filling methods and a hybrid approach for reconstructing surface elevation change across glacier surfaces. Specifically, we implement a gradient-boosted tree model that predicts departures from a realization-specific hypsometric estimate. The model uses topographic and glacier-scale attributes together with predictors describing the observations available around each artificial void. We compare it with constant and hypsometric local-mean filling on identical void pixels. Our objective is predictive reconstruction rather than attribution of physical controls to individual predictors.
+
+We use the Western and Eastern Himalaya as study sites (Fig.~\ref{fig:study}). High Mountain Asia contains one of the largest concentrations of non-polar glaciers in the world, and understanding glacier change in the region has implications for water resources and sea-level rise \citep{bolch2019, shean2020}. Historical imagery provides an important record where field measurements are limited. Studies combining declassified Corona or Hexagon imagery, historical aerial photographs where available, and later observations have extended glacier-change records in the Everest region, Ak-Shirak Range, and other parts of High Mountain Asia \citep{bolch2011,goerlich2017,king2020,bhattacharya2021}. For example, \citet{maurer2019} combined declassified KH-9 Hexagon imagery with modern satellite observations to reconstruct Himalayan glacier change over multiple decades. Such applications motivate the evaluation of void-filling methods, but a model assessed on modern elevation-change data cannot be assumed to transfer unchanged to historical imagery. Therefore, we assess reconstruction within the available reference period and distinguish pixel-level errors, glacier-wide errors, and uncertainty in aggregate performance estimates.
+
+\input{figures_tex/fig_study.tex}
+\FloatBarrier
+
+\section{Data}
+The Western and Eastern Himalaya are selected to examine how each method's performance varies in areas with different glacierized areas, glacier-wide characteristics, and regional surface elevation-change distributions (Figs.~\ref{fig:study} and \ref{fig:distributions}; Table~\ref{tab:metadata}). The two regions also differ in their climatic influences, with a greater contribution from winter westerly disturbances in the west and predominantly summer monsoon precipitation in the east \citep{bolch2019}. The availability of a common surface elevation-change product for both regions allows the methods to be compared using consistently processed reference data \citep{shean2020}. Regional extents follow the Hindu Kush Himalayan Monitoring and Assessment Programme (HIMAP; \citealp{bolch2019}). Figure~\ref{fig:study} shows the study domains and distributions of inventory median glacier elevation.
+
+Surface elevation-change rates for 2000--2018 are taken from the 30\,m product distributed by \citet{sheands2020}. The underlying assessment combines ASTER and high-resolution WorldView/GeoEye stereo DEMs \citep{shean2020}. We use finite reference values within the retained glacier masks to create artificial voids and evaluate their reconstruction. These values provide a common reference for comparing methods, although they contain observational errors.
+
+\input{tables/tab_metadata.tex}
+\FloatBarrier
+
+To efficiently handle the large spatial extent while preserving pixel-level resolution, the dataset is stored as a chunked raster data cube. The cube is divided into fixed-size spatial chunks, allowing individual glacier subsets to be accessed without loading the full domain into memory. Input layers are aligned to the exact 30\,m grid of the elevation-change raster in its Albers equal-area projection. Copernicus GLO-30 surface elevations \citep{opentopography2021} are aligned by bilinear resampling. Slope and aspect rasters are derived from the unmasked DEM prior to glacier extraction, avoiding artificial terrain artifacts at glacier-mask boundaries. 
+
+Input datasets and their roles are summarized in Table~\ref{tab:data}.
+
+\input{tables/tab_data.tex}
+\FloatBarrier
+
+Glacier outlines were constructed by merging RGI v6.0 regions 13--15 \citep{rgi2017} and clipping to the Western and Eastern Himalayan HIMAP domains. Lake-terminating and surge-type glaciers were excluded to limit the influence of calving-related retreat and rapid ice redistribution. These processes can produce elevation-change patterns that differ from those of other glaciers, although their exclusion does not imply that retained elevation changes solely reflect surface mass balance. Of the 12,644 outlines in the study domains, 650 lake-terminating glaciers \citep{luo2026} and 34 surge-type glaciers \citep{guo2023} were removed from the dataset. An additional 276 glaciers were excluded due to incompatible geometries ($<50$ available pixels or domain boundary-edge artifacts). The final dataset contains 11,684 glaciers (Table~\ref{tab:population}).
+
+\input{figures_tex/fig_distributions.tex}
+\FloatBarrier
+
+Throughout the analysis, ``glacier-wide'' refers to the valid reference support within the retained raster masks, with area calculated from the valid-pixel count. The Western Himalaya contains substantially more retained glaciers than the Eastern Himalaya, and the two regions have different glacier elevation and elevation-change distributions (Table~\ref{tab:metadata}; Fig.~\ref{fig:distributions}). The distribution of mean elevation-change rates also differs with elevation. These regional summaries describe the reference data and the observations available under artificial masking but do not distinguish physical variation from reference-product error.
+
+\input{tables/tab_population.tex}
+\FloatBarrier
+
+
+\section{Methods}
+
+\subsection{Artificial void generation}
+Artificial voids allow the methods to be evaluated against withheld reference elevation-change values. Here, void geometry refers to the spatial configuration of a mask, including its area fraction, shape, and position within the glacier elevation range. Voids in historical DEMs are variable, frequently contiguous, and often concentrated in glacier accumulation zones. We use contiguous, elevation-biased masks to approximate these characteristics under controlled conditions, without assuming that they reproduce every process responsible for real missing data. 
+
+For each glacier, five artificial-void realizations are retained to evaluate performance across different void configurations. Five was a practical choice rather than a number determined by a convergence criterion, and the sensitivity to this choice is examined using subsets of the retained realizations (Fig.~\ref{fig:realizations}). A realization refers to one mask which is processed independently. The five masks are not combined into a single larger void. They may overlap, and a pixel hidden in one realization can be available in another. The void fraction (expressed as a fraction of the glacier's valid reference area) for each realization was determined via sampling from a truncated normal distribution with a mean of 0.37 and standard deviation of 0.08, bounded between 0.15 and 0.60 of the eligible glacier pixels. This methodology aims to represent the variability present in void size and geometry in real data while matching the mean void size reported in \citet{maurer2019}.
+
+Each mask starts from an eligible seed pixel at or above the glacier's median eligible elevation and grows through an eight-neighbor flood-fill algorithm \citep{newman1979} until the requested pixel count is reached or no connected eligible pixels remain. Neighbor exploration is randomized and void growth can extend below the median elevation, meaning that the seed restriction does not confine the entire void to the upper half of the glacier. The five masks provide repeated configurations for each glacier, not independent glacier observations. Diagnostic statistics were computed for each void realization to quantify metrics such as the void fraction of reference glacier area, the number of void pixels, the fraction of upper-half elevation pixels designated as void, and the elevation offset between void pixels and the full glacier distribution. The results of this void-generation workflow are stored in a chip file for each glacier, containing the glacier mask, a void mask for each realization, along with coordinates, elevation, and elevation-change values for each pixel. In addition, the diagnostic statistics are reported for each realization across all glaciers in a single metadata table.
+ 
+We refer to glacier pixels with finite elevation-change values in the original dataset as reference pixels. For each artificial-void realization, these pixels are divided into observed pixels, whose values remain available for reconstruction, and withheld pixels, whose values are hidden and used as training labels or evaluation targets. These definitions are formalized using the following notation. For glacier $g$ and realization $r$, let $G_g$ denote the set of reference pixels and $V_{g,r}$ denote the set of withheld artificial-void pixels. The observed pixels are defined as \(O_{g,r}=G_g\cap V_{g,r}^{\prime}\), where $V_{g,r}^{\prime}$ denotes the complement of the withheld pixel set.
+
+\subsection{Glacier partitioning and spatial structure}
+
+Glaciers are assigned to training, validation, and test groups in an approximate 70:15:15 ratio, with all pixels and void realizations from each glacier kept in the same group (Table~\ref{tab:population}). For model development, a subset of the training glaciers is further divided using square spatial blocks with a width of 100\,km. Each selected block is assigned to one of the following roles: model fitting, hyperparameter tuning, or confirmation. Glaciers selected from that block can contribute only to its assigned role, giving 598 glaciers for fitting, 199 for tuning, and 200 for confirmation. No block contributes glaciers to more than one development subset. This block assignment applies only to model development as the overall training, validation, and test groups remain partitioned by glacier and may contain neighboring glaciers with correlated signals or measurement errors. Spatial-block resampling of test performance is described in Sect.~\ref{sec:bootstrap}.
+
+\subsection{Constant void-filling: local mean}
+The most straightforward void-filling approach assigns a single value to all void pixels within a glacier based on the mean surface elevation-change rate of the available pixels from that glacier. For each glacier and realization,
+\begin{equation}
+\widehat y^{\mathrm{con}}_{g,r,i}=\frac{1}{|O_{g,r}|}\sum_{j\in O_{g,r}}y_{g,j},\qquad i\in V_{g,r},
+\end{equation}
+where $y$ denotes the reference elevation-change rate. The mean is recalculated for every realization, so it can change with void size and placement. The method assumes spatially uniform elevation change within the void and serves as a baseline for evaluating more sophisticated techniques. Among constant-filling approaches, only the local mean method is evaluated in this study, given the findings of \citet{mcnabb2019}.
+
+\subsection{Hypsometric void-filling: local elevation-bin mean}
+We implement a hypsometric approach to account for elevation-dependent variations in glacier surface change. Following the local elevation-bin framework evaluated by \citet{mcnabb2019}, available pixels are grouped into 50\,m elevation bins where glacier relief is at least 500\,m, and into ten equally spaced bins otherwise. Bin limits are defined from the finite on-glacier DEM elevations, including the elevations of void pixels. The mean reference elevation-change rate in each occupied bin is calculated using only $O_{g,r}$. A void pixel receives the mean elevation-change value for its elevation bin.
+An elevation bin can contain known elevations but no available elevation-change observations. If all bins are occupied, their means are used directly. Otherwise, missing-bin means are estimated using a third-degree polynomial fitted to the occupied-bin means when at least four bins are occupied and the observed elevation span covers at least two-thirds of the glacier elevation range. Occupied-bin means are retained. In other cases, missing-bin means are estimated by linear interpolation between occupied bin centers, with constant extension of the nearest occupied-bin value outside their range. If only one bin is occupied, its mean is used for the missing bins. Thus, empty bins beyond the observed range require extrapolation, even though their surface elevations are known. The resulting realization-specific hypsometric void-filling estimate is denoted $\widehat y^{\mathrm{hyp}}_{g,r,i}$.
+
+
+\subsection{Machine learning void-filling: hybrid hypsometric--machine learning}
+
+We implement a machine learning approach using gradient-boosted decision tree regression, XGBoost \citep{chen2016}, to estimate surface elevation change across void areas. Rather than directly predicting elevation change, the model is trained to estimate the departure between a reference value and its realization-specific hypsometric baseline:
+\begin{equation}
+d_{g,r,i}=y_{g,i}-\widehat y^{\mathrm{hyp}}_{g,r,i},\qquad
+\widehat y^{\mathrm{xgb}}_{g,r,i}=\widehat y^{\mathrm{hyp}}_{g,r,i}+f(\mathbf X_{g,r,i}).
+\label{eq:target}
+\end{equation}
+Here, $d$ is the hypsometric departure and serves as the training target, $f(\mathbf X)$ is the predicted hypsometric departure, and $\widehat y-y$ is the reconstruction error used to compare methods. This formulation retains the hypsometric estimate while allowing the model to represent deviations from it and does not impose a physical constraint on those deviations. A single model is trained using glaciers from both regions. Absolute and glacier-relative coordinates, along with glacier and realization identifiers, are excluded from its predictors. Projected coordinates are used to calculate distances and spatial blocks, but are not supplied directly to the learner. The final predictor set contains nine static attributes and 16 context variables (Table~\ref{tab:features}).
+
+\subsubsection{Model predictors}
+The static predictors describe pixel elevation, slope and aspect, together with glacier area, minimum, median and maximum elevation, and hypsometric index. Elevation represents gradients associated with temperature and other environmental conditions; it is not itself a complete physical explanation of elevation change. Slope is a pixel-level terrain derivative. Aspect is represented by dimensionless sine and cosine components of azimuth measured clockwise from north.
+
+Context predictors describe the observations available in each realization. They include the hypsometric estimate, the number and fraction of observations in the target elevation bin, observed-bin variability, whether the bin is empty, whether the target lies beyond the observed elevation range, the observed elevation span, and the void fraction. They also describe distance to available observations and local departures from the hypsometric relationship. All elevation-change summaries are recomputed after masking $V_{g,r}$.
+
+The local-departure predictor uses up to 32 available source pixels from the same glacier and realization, strictly within 900\,m of the target. At source pixel $j$, the departure is $y_{g,j}-\widehat y^{\mathrm{hyp}}_{g,r,j}$. Their distance-weighted mean is
+\begin{equation}
+L_{g,r,i}=\frac{\sum_{j\in S_{g,r,i}}\exp\!\left(-\frac{\ell_{ij}}{300\,\mathrm m}\right)(y_{g,j}-\widehat y^{\mathrm{hyp}}_{g,r,j})}{\sum_{j\in S_{g,r,i}}\exp\!\left(-\frac{\ell_{ij}}{300\,\mathrm m}\right)},
+\end{equation}
+where $\ell_{ij}$ is projected distance and $S_{g,r,i}$ contains the selected sources. When fewer than three sources are available, the predictor is assigned a missing value. Native missing-value handling is retained for undefined context quantities. Only available observations enter these predictors.
+
+\input{tables/tab_features.tex}
+\FloatBarrier
+
+\subsubsection{Hyperparameter optimization and training}
+Training examples are artificial-void targets on training glaciers. Their predictors are calculated from the observations remaining in the same realization. For $R_g$ void realizations and $N_{g,r}=|V_{g,r}|$ target pixels, weights defined as
+\begin{equation}
+w_{g,r,i}=\frac{1}{R_gN_{g,r}},
+\end{equation}
+and normalized to a mean of one during fitting. This gives each glacier equal total weight, distributed equally across its realizations and then across their target pixels. The learner minimizes weighted squared error in $d$, equivalent to weighted squared reconstruction error when $\widehat y^{\mathrm{hyp}}$ is fixed.
+
+Hyperparameter optimization uses Optuna's tree-structured Parzen estimator \citep{akiba2019} with sampler seed 42. The development-fitting set contains 506,629 rows after capping targets at 500 per glacier--realization. The tuning and confirmation sets contain 312,003 and 379,672 targets, respectively. We run 100 trials for the hybrid model and 100 for a static-predictor residual control, for 200 trials in total. The control uses the same target and baseline but only the nine static predictors. Each trial uses histogram-based XGBoost training with at most 2,000 boosting rounds and early stopping after 50 rounds without improvement in tuning-set glacier-balanced pixel root mean square error (RMSE). The selected model parameters minimize this RMSE.
+
+The selected configurations are locked before confirmation-set prediction and checked using seeds 42--44. The final hybrid model uses squared-error regression, a histogram maximum bin count of 256, learning rate 0.02337, maximum depth 5, minimum child weight 23.7263, row subsampling 0.62927, column subsampling 0.60414, minimum split loss 1.58038, L1 regularization $7.29\times10^{-8}$, and L2 regularization 9.26169. It is fitted once at seed 42 with 172 trees on all 11,792,199 training targets. Search ranges and development diagnostics accompany the archived model outputs.
+
+\subsection{Reconstruction errors and glacier-wide estimates}
+Pixel-scale evaluation is restricted to common artificial-void targets. For each method, $m$, reconstruction error is
+\begin{equation}
+	e_{m,g,r,i}=\widehat y_{m,g,r,i}-y_{g,i}
+\end{equation}
+where positive errors indicate a more positive reconstructed rate. Pixel mean absolute error (MAE), RMSE, and bias use weights $1/(|\mathcal G|R_gN_{g,r})$, where $\mathcal G$ is the evaluated glacier group. Pixel normalized median absolute deviation (NMAD) is 1.4826 times the weighted median absolute deviation about the weighted median error. These are glacier-balanced metrics, not pooled pixel statistics. Non-void pixels are not added as zero-error observations.
+
+To compare the original and reconstructed glacier-wide signals directly, let $a=900\,\mathrm{m^2}$ and $A_g=a|G_g|$. Thus, the reference ($\dot V^{\mathrm{ref}}$) and reconstructed ($\dot V^{\mathrm{rec}}$) volume-change rates are defined by the following equations:
+\begin{align}
+\dot V_g^{\mathrm{ref}}=a\sum_{i\in G_g}y_{g,i}, \qquad
+\dot V_{m,g,r}^{\mathrm{rec}}=a\left(\sum_{i\in O_{g,r}}y_{g,i}+\sum_{i\in V_{g,r}}\widehat y_{m,g,r,i}\right).
+\end{align}
+
+The glacier-wide specific error ($E$) is
+\begin{equation}
+E_{m,g,r}=\frac{\dot V_{m,g,r}^{\mathrm{rec}}-\dot V_g^{\mathrm{ref}}}{A_g}
+=\frac{1}{|G_g|}\sum_{i\in V_{g,r}}e_{m,g,r,i}.
+\label{eq:glacier}
+\end{equation}
+We compare four estimates: the reference and the constant, hypsometric, and hybrid reconstructions. Observed non-void values are retained in each reconstruction, and their contributions cancel in the reconstruction error. This property means the error in glacier-wide volume-change rate equals the void-integrated error. Glacier MAE is the mean of $|E_{m,g,r}|$ over realizations and then glaciers, RMSE is the square root of the correspondingly averaged $E_{m,g,r}^2$, and bias is the signed average of $E_{m,g,r}$. Glacier NMAD is calculated from each glacier's mean signed error across realizations. Integrated-error metrics use the same aggregation with $a\sum_{i\in V_{g,r}}e_{m,g,r,i}$ in place of $E_{m,g,r}$. Integrated quantities have units of \volrate; no density conversion to mass balance is applied. All retained test glacier--realizations have predictions covering their complete artificial void. The denominator $A_g$ is valid reference area rather than void area or total inventory area.
+
+\subsection{Spatial-block intervals for aggregate performance}\label{sec:bootstrap}
+We estimate uncertainty in aggregate reconstruction performance using a paired spatial-block bootstrap. Glaciers are assigned to square blocks by the projected centroid of their retained raster mask. Whole blocks are sampled with replacement within each region, keeping every glacier and all its realizations together. The same block draw is used for all methods. We use 2,000 draws and report the 2.5th and 97.5th percentiles as 95\% intervals. The primary block width is 100 km, with 50 and 200 km used to examine sensitivity. The Western and Eastern test populations occupy 24 and 15 blocks at 100 km, respectively, decreasing to nine and six at 200 km.
+
+Figure \ref{fig:bootstrap} compares methods using paired differences, such that $\Delta M=M_{\mathrm{comparison}}-M_{\mathrm{baseline}}$. Negative differences indicate lower error for the comparison method. For bias, we subtract the magnitudes of the population mean signed errors, so negative differences indicate smaller bias magnitude. Signed biases are reported separately in the performance tables.
+
+Percentage reductions in the Results and Figure \ref{fig:relative} are calculated by dividing the baseline-minus-comparison difference by the baseline value and multiplying by 100. Positive percentages indicate lower error for the comparison method. Relative bias reductions are omitted because baseline biases close to zero make these ratios unstable.
+
+Contrasts and percentage reductions are recalculated within each paired bootstrap draw. Pixel NMAD point estimates are exact, while its bootstrap intervals use resampled weighted block histograms. These intervals describe aggregate performance uncertainty conditional on the fitted model and evaluated sample. They do not include retraining variability or quantify predictive uncertainty for an individual void.
+
+\subsection{Spatial examples, elevation bands, and realization sensitivity}\label{sec:diagnostics}
+Four test glaciers, two per region, were selected using metadata and void geometry before examining their reconstruction errors. The examples show the five retained masks and, for one realization, the reference, observed, reconstruction, and target-only errors (Figs.~\ref{fig:masks} and \ref{fig:examples}). Figure~\ref{fig:masks} shows the five retained masks for one glacier per region while Fig.~\ref{fig:examples} shows reconstruction examples for four test glaciers.”These analyses illustrate behavior and are not a representative performance sample.
+
+Using each glacier's saved hypsometric bin edges, we decompose reference variance into within- and between-bin terms (Fig.~\ref{fig:bands}). Separately for each realization, observed-minus-withheld mean and standard-deviation contrasts are calculated for bins with at least three observed and three withheld pixels. Bin contrasts are weighted by withheld pixel counts within a realization, then averaged over realizations and equally over glaciers. Coverage fractions use the same realization-then-glacier aggregation. Error summaries for occupied and empty observed bins are conditional on the relevant bin rather than representing overall metrics calculated across all withheld pixels.
+
+We evaluate every nonempty subset of the five realizations (31 subsets), applying the same subset to each method. For each glacier, we compare subset MAE and the hybrid-minus-hypsometric ranking with their five-realization values. The sign-disagreement fraction averages over subsets and then glaciers. Regional sensitivity envelopes use 1,000 random subset selections; they describe mask sensitivity, not confidence intervals. Geometry summaries use achieved void-fraction and mean normalized void-elevation tertiles selected without model-error information (Fig.~\ref{fig:realizations}). Mean normalized void elevation is the average of $(z_i-z_g^{\min})/(z_g^{\max}-z_g^{\min})$ over the void targets, where $z_g^{\min}$ and $z_g^{\max}$ are the elevation limits of the glacier raster support.
+
+\subsection{Regional transfer and coordinate ablation}\label{sec:sensitivities}
+Two supplementary experiments assess different aspects of geographic sensitivity. For regional transfer, 1,000 original-training glaciers per region were selected by metadata, using 100 km block quotas and within-block coverage of area and median elevation. A 100 km separation rule from the other region's test outlines removed no source glaciers. Each source-region model uses at most 200 targets per realization, the fixed model settings and 172 rounds, and is evaluated on both regions' complete test targets (Table~\ref{tab:transfer}; Fig.~\ref{fig:transfer}). Local observations on target glaciers remain available to construct their hypsometric and context predictors; this is not prediction for an entirely unobserved region.
+
+The coordinate experiment combines those two source samples into one shared set of 2,000 training glaciers and 1,128,098 rows. Two models are fitted from scratch with identical rows, labels, weights, seed and fixed settings: the 25 accepted predictors, and the same 25 plus absolute projected pixel-center easting and northing. Training weights give each glacier equal contribution; thus the balanced source sample gives the regions equal total training weight. Both models use 172 rounds without additional tuning or early stopping. The full-data model uses all 8,179 training glaciers, whereas this experiment compares two models fitted on the same capped sample. Both fits use the same column-subsampling fraction (Table~\ref{tab:coordinates}; Fig.~\ref{fig:coordinates}).
+
+Both experiments use paired 100 km whole-block intervals with 2,000 draws and retain all realizations per glacier. Coordinate contrasts are coordinates-off minus coordinates-on; positive error-magnitude contrasts favor inclusion. Combined coordinate intervals resample within both regions. The fixed settings are shared between the experiments; each feature set is not optimized separately.
+
+
+\section{Results}
+
+All three methods are evaluated on the same 2,540,722 artificial-void target pixels from 1,754 test glaciers and 8,770 glacier--realizations. These test-performance summaries exclude RGI60-14.17287 and its five realizations. This post hoc evaluation exclusion does not change the training data, fitted models, glacier split, void masks, or saved predictions. A pixel appearing in several realizations is counted once in each relevant realization. Metrics are reported to three significant figures, and percentage changes are calculated from unrounded values.
+
+\subsection{Pixel-scale performance}
+Constant filling has pixel MAEs of 0.265\,\rate\ in the Western Himalaya and 0.367\,\rate\ in the Eastern Himalaya (Fig.~\ref{fig:residuals}; Table~\ref{tab:pixel}). Hypsometric MAE is 5.99\% and 3.68\% lower, respectively. Hybrid MAE is 21.4\% and 17.8\% lower than constant MAE and 16.4\% and 14.7\% lower than hypsometric MAE. NMAD follows the same method ordering.
+
+\input{figures_tex/fig_residuals.tex}
+\FloatBarrier
+
+
+\input{tables/tab_pixel.tex}
+\FloatBarrier
+
+Hypsometric RMSE is slightly higher than constant RMSE in both regions, whereas hybrid RMSE is lower than both. Constant void-filling has negative signed bias in both regions while hypsometric filling has the smallest absolute regional biases. The hybrid bias values are between those of the two baselines in both regions. For the combined summary, the opposite-signed Western and Eastern hybrid biases partly cancel, resulting in a small bias magnitude. At 100\,km block width, the paired pixel-MAE interval for hypsometric-minus-constant filling is below zero in the west and spans zero in the east. Hybrid-minus-constant and hybrid-minus-hypsometric intervals are below zero in both regions (Fig.~\ref{fig:bootstrap}; Table~\ref{tab:paired}).
+
+\input{figures_tex/fig_bootstrap.tex}
+\FloatBarrier
+
+
+\input{tables/tab_paired.tex}
+\FloatBarrier
+
+
+\subsection{Glacier-wide elevation and volume-change reconstruction}
+The constant void-filling method has glacier-wide specific-error MAEs of 0.0721\,\rate\ for the Western Himalaya and 0.0927\,\rate\ in the Eastern Himalaya (Table~\ref{tab:glacier}; Fig.~\ref{fig:glacier}). Hypsometric MAE is 16.6\% and 13.5\% lower, respectively. The hybrid method's MAE is lower than both baselines and reduces MAE by 20.1\% and 16.9\% relative to hypsometric void-filling. The combined hybrid MAE is 0.0515\,\rate, 32.2\% below constant MAE and 19.4\% below hypsometric MAE. The hybrid method's MAE is lower than the hypsometric method's for 1,224 of 1,754 test glaciers (69.8\%).
+
+\input{tables/tab_glacier.tex}
+\FloatBarrier
+
+Hypsometric filling has the smallest absolute glacier-wide biases in both regions, followed by hybrid and constant filling. The hybrid-minus-hypsometric absolute-bias contrast is positive in the east, with a 100 km interval excluding zero. The corresponding Western contrast and the Eastern glacier-NMAD contrast have intervals spanning zero (Table~\ref{tab:paired}).
+
+\input{figures_tex/fig_glacier.tex}
+
+Per-glacier integrated volume-rate MAE follows the same constant, hypsometric, and hybrid ordering in both regions (Table~\ref{tab:volume}). Hypsometric MAE is 33.1\% and 31.9\% below constant MAE in the Western and Eastern Himalaya, respectively. The hybrid MAE is a further 19.8\% and 16.1\% lower than the hypsometric MAE. Hybrid integrated RMSE is lower than both baselines in both regions, with reductions of 6.03\% in the Western Himalaya and 9.76\% in the Eastern Himalaya relative to the hypsometric method. For the combined-domain, the hybrid method's integrated RMSE is $1.87\times 10^{5}$ \volrate, 6.20\% lower than the hypsometric method's RMSE.
+
+\input{tables/tab_volume.tex}
+\FloatBarrier
+
+\subsection{Spatial, elevation-band, and realization diagnostics}
+
+The spatial examples show variation in method rankings among glaciers and error metrics (Figs.~\ref{fig:masks} and \ref{fig:examples}). In the four geometry-selected examples, hypsometric and hybrid filling both have lower void-target MAE and absolute glacier-specific error than constant filling. Hybrid void-target MAE is lower than hypsometric MAE in three cases and 15.2\% higher in the fourth, while its absolute glacier-specific error is lower in only one.
+
+On an equal-glacier average, 53.0\% of Western and 55.5\% of Eastern Himalaya reference variance lies within elevation bands (Fig.~\ref{fig:bands}). In eligible bins, observed-minus-withheld mean contrasts are $+0.004$ and $+0.018$\,\rate, with intervals spanning zero, while absolute local contrasts average 0.179 and 0.257\,\rate. Observed-bin standard deviations exceed withheld-bin standard deviations in both regions. Empty observed bins contain an average of 14.3\% and 13.7\% of withheld targets, respectively, using realization-then-glacier averaging.
+
+Within bins containing observations, the constant method's MAE exceeds hypsometric MAE, and hybrid MAE is lower than both. In empty observed bins, hypsometric MAE instead exceeds constant MAE by 19.7\% in the west and 16.2\% in the east. Hybrid MAE remains below both, with reductions relative to hypsometric filling of 30.2\% and 24.9\%. Eastern empty-bin signed errors are negative for hypsometric filling and positive for hybrid filling.
+
+The constant, hypsometric, and hybrid MAE ordering persists across the realization-subset sensitivity envelopes and each void-geometry group (Fig.~\ref{fig:realizations}). However, hypsometric MAE is lower than hybrid MAE in 25.5\% of Western and 25.2\% of Eastern Himalaya comparisons based on a single realization. All methods have higher glacier-wide specific-error MAE in the largest void-fraction group than in the smallest. 
+
+\subsection{Regional transfer and coordinate sensitivity}
+Both same-region and cross-region hybrid models have lower glacier-wide specific MAE than the constant and hypsometric baselines (Table~\ref{tab:transfer}). Cross-region training increases MAE relative to same-region training by 17.0\% in the Western Himalaya and 10.8\% in the Eastern Himalaya, with paired difference intervals above zero. Integrated volume-rate RMSE increases by 72.5\% in the Western Himalaya but decreases by 2.58\% in the Eastern Himalaya.
+
+\input{tables/tab_transfer.tex}
+\FloatBarrier
+
+In the matched coordinate experiment, including absolute projected coordinates reduces glacier-wide specific MAE by 1.23\% in the west, 1.48\% in the east, and 1.29\% across the combined sample (Fig.~\ref{fig:coordinateintervals}; Table~\ref{tab:coordinates}). Paired 95\% spatial-block intervals for the off-minus-on MAE contrasts are above zero in both regions and the combined sample. Glacier-wide specific bias magnitudes decrease by 84.1\%, 88.5\%, and 83.3\%, respectively. The absolute-bias contrast intervals exclude zero in the Western and combined samples but span zero in the east.
+
+Coordinate inclusion produces smaller reductions in per-glacier integrated volume-rate RMSE, at 0.0292\% in the Western Himalaya, 0.255\% in the Eastern Himalaya, and 0.0405\% across the combined sample. Integrated volume-rate bias magnitudes increase by 120\%, 458\%, and 37.9\%, respectively. The paired integrated MAE, RMSE, and absolute-bias contrast intervals span zero in each region and the combined sample.
+
+\input{tables/tab_coordinates.tex}
+\FloatBarrier
+
+
+\section{Discussion}
+The three void-filling methods examined in this study differ in how they represent elevation-change patterns and use the observations remaining around a void. The constant method, which estimates a mean value from all available observations, is sensitive to sparsely represented elevation bands. Since higher areas of a glacier's surface tend to thin less rapidly, the preferential removal of high-elevation observations during the artificial void generation process results in a more negative observed mean. This provides a plausible explanation for the negative constant-method biases when evaluated using the elevation-biased voids (Fig.~\ref{fig:distributions}).
+
+Hypsometric void-filling represents the elevation gradient present in glacier surface elevation change. This method estimates individual band means from fewer observations since each band only uses the in-band values. Therefore, sparse sampling, local extremes, and extrapolation into unobserved bands can offset its advantage over the glacier-wide constant method. This trade-off helps explain why hypsometric filling reduces MAE and bias without consistently reducing pixel RMSE. Observation coverage and the representativeness of retained values matter alongside the strength of the elevation-change relationship \citep{mcnabb2019}.
+
+The hybrid void-filling method uses observed hypsometric departures and glacier attributes to adjust the band estimate. Nearby departures may describe spatial patterns that elevation alone cannot distinguish, while targets farther from observations depend more strongly on relationships learned across glaciers. However, within-band variability includes both physical variation and reference-product error, so its magnitude does not establish how much physical signal the hybrid method recovers or provide a lower bound on glacier-wide error since opposing pixel errors can cancel during spatial averaging.
+
+The larger errors present in the Eastern Himalaya across all methods may reflect differences in target variability, observation coverage, and reference quality. Eastern Himalayan glaciers exhibit more negative and variable mean elevation-change rates across elevations and a broader distribution of glacier-mean elevation change rates, as compared to glaciers in the Western Himalaya (Fig.~\ref{fig:distributions}; Table~\ref{tab:metadata}). These differences could make Eastern Himalayan reconstructions more sensitive to how well observations represent the elevation-change pattern across a void. Differences in accumulation, melt, glacier geometry, and ice redistribution could also alter elevation gradients and spatial departures from band means \citep{bolch2019, shean2020}.
+
+The combined-domain hybrid model may encounter different predictor–departure relationships in the two regions. Western glaciers contribute more total fitting weight because they are more numerous, despite equal weighting of individual glaciers. Incomplete representation of Eastern Himalaya conditions could therefore contribute to the hybrid method's positive bias and larger error. The matched coordinate experiment suggests that location contains information relevant to the mean correction to some degree but does not fully correct the error. It cannot establish that training imbalance or coordinate omission causes the full model’s Eastern bias.
+
+
+Each error metric analyzed in this study emphasizes a different property of reconstruction. Smaller absolute errors can coexist with a shift in the signed mean, while RMSE gives greater influence to occasional large errors. The training objective also minimizes glacier-balanced squared pixel errors rather than glacier-wide specific MAE or integrated volume-rate RMSE. Better pixel predictions therefore need not produce the best glacier-wide integral. Opposing errors can cancel during averaging while spatially coherent errors can persist \citep{rolstad2009,hugonnet2022}.
+
+At the pixel scale, the hybrid method’s lower NMAD in both regions indicates a tighter central spread of reconstruction errors, complementing its lower MAE and RMSE. Hypsometric filling also reduces NMAD relative to constant filling while increasing RMSE, consistent with a narrower central distribution but greater influence from large deviations. This pattern could reflect sensitivity to sparse observations or extrapolation in particular elevation bands.
+
+Integrated volume-rate error equals glacier-wide specific error multiplied by valid reference-data area. Consequently, each glacier’s contribution to the mean squared integrated error is its squared specific error multiplied by the square of its reference area. Integrated RMSE therefore gives greater influence to errors on larger glaciers. Although area scaling preserves comparisons of error magnitude between methods for an individual glacier, it can change their ordering across the evaluated sample. Specific and integrated summaries thus provide complementary measures of reconstruction performance, with the preferred method depending on the error characteristic of interest.
+
+The coordinate experiment also illustrates why specific and integrated biases can respond differently. Moving the mean specific error closer to zero does not necessarily improve cancellation among area-scaled signed errors. Large relative increases in integrated bias partly reflect small starting bias magnitudes and do not imply comparable increases in typical glacier error. Paired confidence intervals spanning zero further limit the evidence for changes in integrated performance. Similarly, opposite-signed regional errors can produce a small combined bias while masking larger biases within each region.
+
+The increase in MAE under cross-region training suggests that learned departure relationships are not fully transferable between the two regions. The differing responses of MAE and integrated RMSE are consistent with changes in how errors are distributed across glaciers and glacier sizes. Local observations remain available on target glaciers, so these experiments assess transfer of the learned correction while retaining target-specific context.
+
+The modest MAE benefit from including coordinates in the hybrid model indicates that absolute location supplies information beyond the accepted terrain and context predictors under the matched experimental settings. Coordinates could represent climatic structure, glacier characteristics, or spatially correlated reference errors. Coordinate inclusion can bring glacier-wide specific bias closer to zero while increasing integrated bias magnitude if the corrections cancel less effectively after errors are scaled by glacier area. The large relative increases in integrated bias partly reflect small initial bias magnitudes, while the paired intervals spanning zero limit evidence for a consistent deterioration in integrated performance.
+
+The choice to include coordinates may depend on the intended application. For reconstruction within the sampled geographic domain, coordinate inclusion offers a modest advantage when glacier-wide specific MAE is the primary criterion. Excluding coordinates may be appropriate when limiting direct reliance on location-specific relationships is a priority. For applications prioritizing per-glacier integrated volume-rate errors, the paired intervals provide no clear basis for preferring either configuration.
+
+Spatial-block intervals describe aggregate performance uncertainty conditional on the fitted models. They do not remove training–test dependence or include variability from refitting and model selection. Coarser blocks also leave fewer units for resampling, limiting interval stability. Individual predictive uncertainty remains unresolved because prediction-minus-reference errors combine reconstruction and reference-product errors. Separating these components and propagating uncertainty through glacier-wide reconstructions requires compatible reference-error information and explicit treatment of spatial covariance  \citep{hugonnet2022}.
+
+Repeated masks reveal sensitivity to which observations remain, rather than providing independent glacier samples. Stable population-level ordering can therefore coexist with unstable individual-glacier rankings. Larger voids remove both target values and contextual information, but comparisons among the lower, middle, and upper thirds of the void-geometry distribution involve different glacier mixtures and do not isolate a causal effect of void size. The overlapping masks also share one reference field, so the subset analysis cannot establish convergence beyond the retained realizations.
+
+Historical applications introduce changes in observation period, glacier state, resolution, and error structure that can alter both the hypsometric relationship and the usefulness of local context. The modern calibration therefore requires separate validation before transfer. Tests with masks derived from actual image matching and independent observation periods would provide more direct evidence of applicability \citep{mcnabb2019}. Evaluation also remains limited to the reference-data area and retained glacier types; native gaps and entirely unobserved glaciers are not tested. Future development should prioritize spatially separated validation and calibrated prediction intervals across observation-coverage conditions.
+
+\conclusions[Conclusions]
+We compared constant, hypsometric, and hybrid hypsometric--machine learning void-filling methods using artificially generated voids on each of 1,754 test glaciers in the Western and Eastern Himalaya. Relative to the hypsometric method, the hybrid method reduces combined glacier-wide specific MAE by 19.4\%, from 0.0639 to 0.0515 \rate. Pixel MAE decreases by 16.4\% in the Western Himalaya and 14.7\% in the Eastern Himalaya, accompanied by lower pixel NMAD in both regions. Combined per-glacier integrated volume-rate RMSE decreases by 6.20\%, although this comparison is sensitive to large, influential glaciers. These findings support using glacier- and pixel-specific observational context to improve reconstruction beyond elevation-bin means.
+
+These general improvements coincide with larger glacier-wide specific bias and increased sensitivity to geographic transfer and void geometry for Eastern Himalaya glaciers. Including absolute spatial coordinates reduces the combined-domain specific MAE by 1.29\% in the matched experiment, while its integrated-performance intervals provide no clear preference between configurations. Coordinate use should therefore reflect the intended application and error metric. Next steps should prioritize geographically separated model development and evaluation, together with tests using independent observation periods and void patterns derived from actual image matching. The analysis and quantification of calibrated predictive uncertainty for this method's reconstruction ability, specifically using a dataset with compatible reference-error information and directly addressing spatial covariance when combining pixel errors into glacier-wide estimates, should be prioritized in future work.
+
+\clearpage
+
+\codedataavailability{The reference elevation-change product is available from \citet{sheands2020}. The project code repository is \url{https://github.com/cmarkovsky/ensemble_void_fill}.}
+
+\authorcontribution{CM and SR designed the study; CM developed and implemented the code for artificial void generation, void filling, analysis, and figure creation; CM wrote the manuscript, with all other authors contributing edits.}
+
+\competinginterests{The authors declare that they have no conflict of interest.}
+
+\begin{acknowledgements}
+This work was funded by NASA HiMAT 19-HMA19-0029 and NASA 80NSSC22K1866, and NSF 2218664 and 1853881. We thank the University of Utah Center for High Performance Computing (CHPC) for computational resources and input on model design.
+\end{acknowledgements}
+
+\input{references.tex}
+
+\end{document}

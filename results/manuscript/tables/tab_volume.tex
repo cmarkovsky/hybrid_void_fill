@@ -1,0 +1,24 @@
+\begin{table}[!htbp]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\caption{Per-glacier integrated volume-rate reconstruction errors (m$^3$ a$^{-1}$). Each error equals glacier-wide specific error multiplied by valid reference-data area. Metrics give equal weight to realizations within each glacier and equal weight to glaciers within each population. Observed values are retained, so reconstruction error arises entirely from withheld pixels.}
+\label{tab:volume}
+\begin{tabular}{llrrr}
+\toprule
+Region & Method & MAE & RMSE & Bias \\
+\midrule
+Western & Constant & $6.81\times10^{4}$ & $3.81\times10^{5}$ & $-3.76\times10^{4}$ \\
+ & Hypsometric & $4.55\times10^{4}$ & $2.17\times10^{5}$ & {\boldmath$+4.13\times10^{3}$} \\
+ & Hybrid & {\boldmath$3.65\times10^{4}$} & {\boldmath$2.04\times10^{5}$} & $+4.92\times10^{3}$ \\
+\midrule
+Eastern & Constant & $6.04\times10^{4}$ & $1.84\times10^{5}$ & $-4.01\times10^{4}$ \\
+ & Hypsometric & $4.11\times10^{4}$ & $9.95\times10^{4}$ & $-7.99\times10^{3}$ \\
+ & Hybrid & {\boldmath$3.45\times10^{4}$} & {\boldmath$8.98\times10^{4}$} & {\boldmath$+5.81\times10^{3}$} \\
+\midrule
+Combined & Constant & $6.66\times10^{4}$ & $3.52\times10^{5}$ & $-3.81\times10^{4}$ \\
+ & Hypsometric & $4.47\times10^{4}$ & $2.00\times10^{5}$ & {\boldmath$+1.83\times10^{3}$} \\
+ & Hybrid & {\boldmath$3.62\times10^{4}$} & {\boldmath$1.87\times10^{5}$} & $+5.09\times10^{3}$ \\
+\bottomrule
+\end{tabular}
+\belowtable{Evaluation excludes RGI60-14.17287 and its five realizations. Western, Eastern, and combined counts are 1,422, 332, and 1,754 glaciers. Values are rounded to three significant figures. Bold identifies the lowest error metric and the bias closest to zero within each population, using unrounded values.}
+\end{table}

@@ -1,0 +1,897 @@
+[
+  {
+    "table": 5,
+    "group": "Western",
+    "method": "Constant",
+    "values": [
+      0.2648785065012256,
+      0.3717861329676383,
+      0.278550335836038,
+      -0.096119519573556
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 5,
+    "group": "Western",
+    "method": "Hypsometric",
+    "values": [
+      0.2490228223966182,
+      0.3882976815946454,
+      0.2462357502669095,
+      0.0046974899060186
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 5,
+    "group": "Western",
+    "method": "Hybrid",
+    "values": [
+      0.2082869773483205,
+      0.3100723708397298,
+      0.214010249787569,
+      -0.0098183797982893
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 5,
+    "group": "Eastern",
+    "method": "Constant",
+    "values": [
+      0.3667940295658322,
+      0.5172719450590363,
+      0.390039802390337,
+      -0.0834789610615608
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 5,
+    "group": "Eastern",
+    "method": "Hypsometric",
+    "values": [
+      0.3532898964693839,
+      0.5238874421366831,
+      0.3601802057147026,
+      0.0097746905692357
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 5,
+    "group": "Eastern",
+    "method": "Hybrid",
+    "values": [
+      0.3013524549189445,
+      0.4459600673911404,
+      0.3051717879474163,
+      0.0466164533797685
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 5,
+    "group": "Combined",
+    "method": "Constant",
+    "values": [
+      0.2841692440482321,
+      0.403370333980622,
+      0.2955759769655764,
+      -0.0937268939030986
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 5,
+    "group": "Combined",
+    "method": "Hypsometric",
+    "values": [
+      0.2687586653796047,
+      0.4173559676772203,
+      0.2640108809173107,
+      0.005658510784119
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 5,
+    "group": "Combined",
+    "method": "Hybrid",
+    "values": [
+      0.2259025637527944,
+      0.3399865005048711,
+      0.228474250665307,
+      0.0008636980894616
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "table": 6,
+    "group": "whim",
+    "method": "Pixel MAE",
+    "values": [
+      -0.04073584504829769,
+      -0.0455062154786626,
+      -0.0361932030747309
+    ]
+  },
+  {
+    "table": 6,
+    "group": "ehim",
+    "method": "Pixel MAE",
+    "values": [
+      -0.05193744155043939,
+      -0.0601295087011658,
+      -0.0424812528895479
+    ]
+  },
+  {
+    "table": 6,
+    "group": "whim",
+    "method": "Pixel absolute bias",
+    "values": [
+      0.005120889892270699,
+      -0.0142799922273814,
+      0.0174636476212329
+    ]
+  },
+  {
+    "table": 6,
+    "group": "ehim",
+    "method": "Pixel absolute bias",
+    "values": [
+      0.036841762810532794,
+      0.0008049564905363,
+      0.0565462536900933
+    ]
+  },
+  {
+    "table": 6,
+    "group": "whim",
+    "method": "Glacier MAE",
+    "values": [
+      -0.012089834718690205,
+      -0.0140883523506809,
+      -0.0101466575051028
+    ]
+  },
+  {
+    "table": 6,
+    "group": "ehim",
+    "method": "Glacier MAE",
+    "values": [
+      -0.013550354644254595,
+      -0.0172954390796436,
+      -0.0084540576668353
+    ]
+  },
+  {
+    "table": 6,
+    "group": "whim",
+    "method": "Glacier NMAD",
+    "values": [
+      -0.003889315723652302,
+      -0.0081244826037186,
+      -0.0005190327727749
+    ]
+  },
+  {
+    "table": 6,
+    "group": "ehim",
+    "method": "Glacier NMAD",
+    "values": [
+      -0.0090903775036986,
+      -0.0192751529864353,
+      0.0012746766047937
+    ]
+  },
+  {
+    "table": 6,
+    "group": "whim",
+    "method": "Glacier absolute bias",
+    "values": [
+      0.0011057939221719,
+      -0.0058779855978938,
+      0.0065358514311373
+    ]
+  },
+  {
+    "table": 6,
+    "group": "ehim",
+    "method": "Glacier absolute bias",
+    "values": [
+      0.0139650337224617,
+      0.0018397784691757,
+      0.0207491366883157
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Western",
+    "method": "Constant",
+    "values": [
+      0.0721149127577144,
+      0.1007213167315191,
+      0.0614464915101713,
+      -0.0357167905487544
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Western",
+    "method": "Hypsometric",
+    "values": [
+      0.0601159525347203,
+      0.0941790847548936,
+      0.0410107288038909,
+      0.0022288444706507
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Western",
+    "method": "Hybrid",
+    "values": [
+      0.0480261178160301,
+      0.0713314696899575,
+      0.0371214130802386,
+      -0.0033346383928226
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Eastern",
+    "method": "Constant",
+    "values": [
+      0.0926612511591483,
+      0.125421131133544,
+      0.0851941383614495,
+      -0.0302632923828109
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Eastern",
+    "method": "Hypsometric",
+    "values": [
+      0.0801505903027563,
+      0.1159341122850468,
+      0.0556873734651669,
+      0.0042328235169589
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Eastern",
+    "method": "Hybrid",
+    "values": [
+      0.0666002356585017,
+      0.0961268183805339,
+      0.0465969959614683,
+      0.0181978572394206
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Combined",
+    "method": "Constant",
+    "values": [
+      0.0760039574266289,
+      0.1058397357411309,
+      0.0660160677743989,
+      -0.034684543461472
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Combined",
+    "method": "Hypsometric",
+    "values": [
+      0.0639081416675526,
+      0.0986656468626056,
+      0.0431614597979511,
+      0.0026081609149918
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 7,
+    "group": "Combined",
+    "method": "Hybrid",
+    "values": [
+      0.0515418573392346,
+      0.0766427509540457,
+      0.0384865653619506,
+      0.0007410677359714
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Western",
+    "method": "Constant",
+    "values": [
+      68076.70518506001,
+      380972.74774565233,
+      -37625.82643131266
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Western",
+    "method": "Hypsometric",
+    "values": [
+      45542.1528577684,
+      216638.8372655031,
+      4129.660026944554
+    ],
+    "bold": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Western",
+    "method": "Hybrid",
+    "values": [
+      36536.97871813757,
+      203571.76792995504,
+      4919.588788341284
+    ],
+    "bold": [
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Eastern",
+    "method": "Constant",
+    "values": [
+      60395.92019390953,
+      183602.00034794165,
+      -40079.08613475475
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Eastern",
+    "method": "Hypsometric",
+    "values": [
+      41142.34814140719,
+      99514.90489606664,
+      -7994.267168563289
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Eastern",
+    "method": "Hybrid",
+    "values": [
+      34504.57605460001,
+      89803.81802580354,
+      5806.6891174025695
+    ],
+    "bold": [
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Combined",
+    "method": "Constant",
+    "values": [
+      66622.87359038387,
+      352205.1659904359,
+      -38090.18345613751
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Combined",
+    "method": "Hypsometric",
+    "values": [
+      44709.350596746786,
+      199808.51785005792,
+      1834.8231803604024
+    ],
+    "bold": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 8,
+    "group": "Combined",
+    "method": "Hybrid",
+    "values": [
+      36152.28220485681,
+      187413.60874629585,
+      5087.500595210353
+    ],
+    "bold": [
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Western",
+    "method": "Constant",
+    "values": [
+      0.0721149127577144,
+      -0.0357167905487544,
+      380972.74774565233
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Western",
+    "method": "Hypsometric",
+    "values": [
+      0.0601159525347203,
+      0.0022288444706507,
+      216638.8372655031
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Western",
+    "method": "Hybrid (full data)",
+    "values": [
+      0.0480261178160301,
+      -0.0033346383928226,
+      203571.76792995504
+    ],
+    "bold": [
+      true,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Western",
+    "method": "Hybrid (Western-trained)",
+    "values": [
+      0.0487855320268541,
+      0.0012077952120492,
+      155042.9693913813
+    ],
+    "bold": [
+      false,
+      true,
+      true
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Western",
+    "method": "Hybrid (Eastern-trained)",
+    "values": [
+      0.0570559830411215,
+      -0.0279849077523549,
+      267398.0488856331
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Eastern",
+    "method": "Constant",
+    "values": [
+      0.0926612511591483,
+      -0.0302632923828109,
+      183602.00034794165
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Eastern",
+    "method": "Hypsometric",
+    "values": [
+      0.0801505903027563,
+      0.0042328235169589,
+      99514.90489606664
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Eastern",
+    "method": "Hybrid (full data)",
+    "values": [
+      0.0666002356585017,
+      0.0181978572394206,
+      89803.81802580354
+    ],
+    "bold": [
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Eastern",
+    "method": "Hybrid (Western-trained)",
+    "values": [
+      0.0736637179966908,
+      0.0358469994070954,
+      87847.21681191622
+    ],
+    "bold": [
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 9,
+    "group": "Eastern",
+    "method": "Hybrid (Eastern-trained)",
+    "values": [
+      0.0664847481730412,
+      -0.0034257430056967,
+      90178.26591868074
+    ],
+    "bold": [
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Western",
+    "method": "Constant",
+    "values": [
+      0.0721149127577144,
+      -0.0357167905487544,
+      380972.74774565233,
+      -37625.82643131266
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Western",
+    "method": "Hypsometric",
+    "values": [
+      0.0601159525347203,
+      0.0022288444706507,
+      216638.8372655031,
+      4129.660026944554
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Western",
+    "method": "Hybrid (coords off)",
+    "values": [
+      0.0493395133946525,
+      -0.010457582287273,
+      177833.7338504144,
+      -1660.4480130628567
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Western",
+    "method": "Hybrid (coords on)",
+    "values": [
+      0.0487346505223044,
+      -0.0016593865090958,
+      177781.8111686859,
+      3646.787275232839
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Eastern",
+    "method": "Constant",
+    "values": [
+      0.0926612511591483,
+      -0.0302632923828109,
+      183602.00034794165,
+      -40079.08613475475
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Eastern",
+    "method": "Hypsometric",
+    "values": [
+      0.0801505903027563,
+      0.0042328235169589,
+      99514.90489606664,
+      -7994.267168563289
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Eastern",
+    "method": "Hybrid (coords off)",
+    "values": [
+      0.0655614820743651,
+      0.0072062517687781,
+      84445.85162801151,
+      -835.8352144497297
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Eastern",
+    "method": "Hybrid (coords on)",
+    "values": [
+      0.0645898224531655,
+      0.000832253438936,
+      84230.84252245448,
+      -4663.296796204553
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Combined",
+    "method": "Constant",
+    "values": [
+      0.0760039574266289,
+      -0.034684543461472,
+      352205.1659904359,
+      -38090.18345613751
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Combined",
+    "method": "Hypsometric",
+    "values": [
+      0.0639081416675526,
+      0.0026081609149918,
+      199808.51785005792,
+      1834.8231803604024
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Combined",
+    "method": "Hybrid (coords off)",
+    "values": [
+      0.0524100342621922,
+      -0.0071141427738129,
+      164282.14300228757,
+      -1504.3639485591182
+    ],
+    "bold": [
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  {
+    "table": 10,
+    "group": "Combined",
+    "method": "Hybrid (coords on)",
+    "values": [
+      0.0517357434989554,
+      -0.0011877648085562,
+      164215.67619410998,
+      2073.8409173552946
+    ],
+    "bold": [
+      true,
+      true,
+      true,
+      false
+    ]
+  }
+]

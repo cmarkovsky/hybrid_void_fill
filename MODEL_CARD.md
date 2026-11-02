@@ -1,0 +1,13 @@
+# Manuscript model and evaluation
+
+The hybrid reconstructs glacier elevation-change rates as `h + f(X)`, where `h` is the realization-specific local hypsometric estimate and XGBoost predicts `y − h`. The stored primary booster is `models/hybrid/model.json`, SHA256 `f87e0f8779d2eb9f4775ffa661c29267ac6f7efef7d30d51e1b7d3d0ef75505e`.
+
+The model has 25 predictors: nine terrain/glacier attributes and 16 realization-specific context fields. Coordinates and debris are excluded from the primary model. Each context field uses only the same glacier's observed nonvoid values for that realization. Local residuals use up to 32 sources strictly within 900 m, with deterministic distance/raster-index tie handling, exponential distance weights with 300 m scale, and a minimum of three sources. The complete feature order and definitions accompany the booster.
+
+The primary model uses 8,179 training glaciers and 11,792,199 targets, glacier/realization-balanced weights, seed 42, and 172 trees. Final settings and selection diagnostics are in `training_config.json`. The development search used training glaciers only; validation contains 1,751 glaciers. Supplementary regional-transfer and coordinate models are separate fixed-setting fits on capped samples, not replacements for the primary model.
+
+The default manuscript evaluation excludes RGI60-14.17287 and its five realizations from 1,755 assigned test glaciers. This leaves 1,754 evaluated glaciers and 2,540,722 target instances per method. The exclusion was decided post hoc with test results in view. No physical or data-quality rationale is recorded in the supplied materials. It does not change the training data, fitted models, split assignments, masks, or stored predictions.
+
+For the evaluated population, combined glacier-wide specific MAE is 0.051542 m a⁻¹ (hybrid) versus 0.063908 (hypsometric), a 19.35% reduction; 1,224 of 1,754 glaciers improve. Integrated volume-rate RMSE is approximately 187,414 versus 199,809 m³ a⁻¹. Including the excluded glacier reverses that RMSE ordering (approximately 292,104 versus 268,513). The integrated-error conclusion is therefore influence-sensitive.
+
+Spatial intervals are conditional on the fitted models and do not describe fitting uncertainty. Other limits include the small number of Eastern spatial blocks, repeated evaluation of the same held-out glaciers during the research, and model selection on a limited development sample. All manuscript comparisons use common target support and valid-reference-area denominators; integrated quantities are per-glacier volume rates, with no density conversion or regional-total interpretation.

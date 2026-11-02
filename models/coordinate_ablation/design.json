@@ -1,0 +1,92 @@
+{
+  "coordinates": {
+    "names": [
+      "easting_m",
+      "northing_m"
+    ],
+    "definition": "pixel-centre x and y of the target pixel in the cube's Albers equal-area CRS (lat0 36, lon0 85, WGS 84), metres, untransformed",
+    "source": "row-shard x_coord/y_coord keyed by (rgiid, pixel_flat_index); verified against chip axes, the cube GeoTransform and the cube coordinate arrays",
+    "mapping_checks_sha256": "35e82d3f8d96ebeb621901b0a599cb15aae744ff91de603ab682097f34e5b1c1",
+    "as_float32": "XGBoost input dtype; spacing 0.125 m at the largest coordinate"
+  },
+  "model": {
+    "params": {
+      "eta": 0.023371629140551124,
+      "max_depth": 5,
+      "min_child_weight": 23.726324291897363,
+      "subsample": 0.6292741058079844,
+      "colsample_bytree": 0.6041442889428904,
+      "gamma": 1.5803784544055597,
+      "alpha": 7.287797274235728e-08,
+      "lambda": 9.261687351461754,
+      "objective": "reg:squarederror",
+      "tree_method": "hist",
+      "device": "cpu",
+      "max_bin": 256,
+      "disable_default_eval_metric": 1
+    },
+    "rounds": 172,
+    "seed": 42,
+    "nthread": 8,
+    "early_stopping": null,
+    "init_model": null,
+    "tuning": "none; accepted parameters for both arms",
+    "target": "y - h",
+    "prediction": "h + f(X)",
+    "colsample_bytree_note": "fraction kept; with 27 columns the ON arm samples among more candidates"
+  },
+  "metrics": {
+    "pixel": "glacier-balanced weights 1/(R_g * N_gr * G): MAE, RMSE, signed bias; NMAD = 1.4826 * weighted median of |e - weighted median(e)| with the same weights",
+    "glacier_specific": "E_gr = summed void error / valid glacier pixels; per glacier mean of |E_gr|, of E_gr^2, of E_gr over realizations; then equal-glacier means. MAE, RMSE, bias; NMAD = 1.4826 * median |m - median(m)| of per-glacier mean errors m",
+    "integrated": "V_gr = summed void error * 900 m^2; MAE, RMSE, bias as for glacier-specific",
+    "units": "m/yr (pixel, glacier-specific), m^3/yr (integrated)",
+    "nmad_note": "one implementation for every method in this run's tables; frozen pipeline NMAD may differ slightly and is not mixed in"
+  },
+  "primary_contrast": {
+    "definition": "coords_off minus coords_on_absolute; negative error-magnitude differences favour excluding coordinates",
+    "magnitude_metrics": [
+      "glacier_mae",
+      "glacier_rmse",
+      "pixel_mae",
+      "pixel_rmse",
+      "integrated_mae",
+      "integrated_rmse"
+    ],
+    "bias_metrics": "abs(regional signed bias_off) - abs(regional signed bias_on) for glacier, pixel and integrated bias; signed biases also reported",
+    "secondary": [
+      "each arm minus hypsometric (glacier MAE)"
+    ],
+    "ratios": "secondary only; none formed with near-zero bias"
+  },
+  "intervals": {
+    "blocks": "frozen 100-km block assignment of the release bootstrap",
+    "block_assignments_sha256": "16373a06d62529ff179a42c181e9d924c97ab1740984511fb712807f034e2374",
+    "resampling": "whole blocks with replacement within each region (combined: both regions resampled together, stratified by region); all realizations of a glacier kept",
+    "draws": 2000,
+    "seed": 20261019,
+    "paired": "the same draws for both arms and every metric",
+    "level": "2.5-97.5 percentiles",
+    "meaning": "conditional descriptive intervals for this fixed fitted pair; not training uncertainty; no equivalence margin is declared"
+  },
+  "interpretation_rules": [
+    "A worse ON or OFF score is a valid finding.",
+    "The ON model is not promoted if it scores better; the production model is unchanged.",
+    "Similar or better OFF scores do not show that the other features carry no spatial information.",
+    "An interval spanning zero does not establish equivalence.",
+    "Regional transfer answers a different question and is reported separately."
+  ],
+  "sample": {
+    "glaciers": 2000,
+    "rows": 1128098,
+    "sources": "models/regional_transfer/design.json",
+    "cap_per_glacier_realization": 200,
+    "same_rows_both_arms": true
+  },
+  "evaluation": {
+    "split": "data/metadata/splits/evaluation_split.json",
+    "excluded": [
+      "RGI60-14.17287"
+    ],
+    "test_glaciers": 1754
+  }
+}

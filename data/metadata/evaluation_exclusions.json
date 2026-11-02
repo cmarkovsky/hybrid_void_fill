@@ -1,0 +1,34 @@
+{
+  "record": "Post hoc evaluation exclusions applied to manuscript test-performance summaries only.",
+  "selection_name": "manuscript",
+  "exclusions": [
+    {
+      "rgiid": "RGI60-14.17287",
+      "assigned_group": "test",
+      "region": "whim",
+      "realizations_excluded": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "scope": "every manuscript test-performance summary: point metrics, paired and marginal bootstrap intervals, transfer and coordinate comparisons, diagnostics and figures",
+      "type": "post hoc evaluation exclusion, decided with test results in view",
+      "decided_by": "author (Cameron Markovsky)",
+      "decided_on": "2026-10-28",
+      "physical_or_data_quality_rationale": "No physical or data-quality rationale is recorded in the supplied materials.",
+      "does_not_change": [
+        "training rows",
+        "fitted models",
+        "tuning",
+        "validation",
+        "original or production split assignments",
+        "void masks",
+        "reference data",
+        "saved predictions"
+      ],
+      "source_data_retained": true
+    }
+  ]
+}

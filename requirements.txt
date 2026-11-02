@@ -1,0 +1,19 @@
+# Python 3.12; direct dependencies from the environment used for the manuscript.
+numpy==2.4.1
+pandas==2.3.3
+xarray==2025.12.0
+dask==2026.1.1
+zarr==3.1.5
+rasterio==1.5.0
+rioxarray==0.20.0
+pyproj==3.7.2
+affine==2.4.0
+shapely==2.1.2
+geopandas==1.1.2
+cartopy==0.25.0
+pyarrow==23.0.0
+scipy==1.17.0
+xgboost==3.2.0
+matplotlib==3.10.8
+seaborn==0.13.2
+tqdm==4.67.1

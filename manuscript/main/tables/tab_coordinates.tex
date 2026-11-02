@@ -1,0 +1,27 @@
+\begin{table}[!htbp]
+\centering\small
+\setlength{\tabcolsep}{5pt}
+\caption{Matched hybrid models with absolute projected coordinates excluded (off) or included (on), alongside constant and hypsometric baselines. The off model uses 25 predictors, and the on model adds projected pixel-center easting and northing. Both models use identical capped training rows, labels, weights, seed, and fixed settings. MAE and Bias describe glacier-wide specific errors in m a$^{-1}$. Vol. RMSE and Vol. bias describe per-glacier integrated volume-rate errors in m$^3$ a$^{-1}$. Biases are signed.}
+\label{tab:coordinates}
+\begin{tabular}{llrrrr}
+\toprule
+Region & Method / arm & MAE & Bias & Vol. RMSE & Vol. bias \\
+\midrule
+Western & Constant & $0.0721$ & $-0.0357$ & $3.81\times10^{5}$ & $-3.76\times10^{4}$ \\
+ & Hypsometric & $0.0601$ & $+0.00223$ & $2.17\times10^{5}$ & $+4.13\times10^{3}$ \\
+ & Hybrid (coords off) & $0.0493$ & $-0.0105$ & $1.78\times10^{5}$ & {\boldmath$-1.66\times10^{3}$} \\
+ & Hybrid (coords on) & {\boldmath$0.0487$} & {\boldmath$-0.00166$} & {\boldmath$1.78\times10^{5}$} & $+3.65\times10^{3}$ \\
+\midrule
+Eastern & Constant & $0.0927$ & $-0.0303$ & $1.84\times10^{5}$ & $-4.01\times10^{4}$ \\
+ & Hypsometric & $0.0802$ & $+0.00423$ & $9.95\times10^{4}$ & $-7.99\times10^{3}$ \\
+ & Hybrid (coords off) & $0.0656$ & $+0.00721$ & $8.44\times10^{4}$ & {\boldmath$-8.36\times10^{2}$} \\
+ & Hybrid (coords on) & {\boldmath$0.0646$} & {\boldmath$+0.000832$} & {\boldmath$8.42\times10^{4}$} & $-4.66\times10^{3}$ \\
+\midrule
+Combined & Constant & $0.0760$ & $-0.0347$ & $3.52\times10^{5}$ & $-3.81\times10^{4}$ \\
+ & Hypsometric & $0.0639$ & $+0.00261$ & $2.00\times10^{5}$ & $+1.83\times10^{3}$ \\
+ & Hybrid (coords off) & $0.0524$ & $-0.00711$ & $1.64\times10^{5}$ & {\boldmath$-1.50\times10^{3}$} \\
+ & Hybrid (coords on) & {\boldmath$0.0517$} & {\boldmath$-0.00119$} & {\boldmath$1.64\times10^{5}$} & $+2.07\times10^{3}$ \\
+\bottomrule
+\end{tabular}
+\belowtable{Evaluation excludes RGI60-14.17287 and its five realizations. Western, Eastern, and combined counts are 1,422, 332, and 1,754 glaciers. Values are rounded to three significant figures. Bold identifies the lowest error metric and the bias closest to zero within each population, using unrounded values.}
+\end{table}

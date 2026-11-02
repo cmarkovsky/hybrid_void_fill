@@ -1,0 +1,477 @@
+{
+  "exclusions": [
+    {
+      "name": "boundary_clipped",
+      "source": "data_archive/prepared/exclusions/boundary_exclusion/excluded_glaciers.json",
+      "sha256": "8fda7a337b7d91bb6e6488cbc49343d040acfb42e42b18caefd629df9775824d",
+      "criterion": "share of the RGI 6.0 outline outside the HIMAP Western Himalaya + Eastern Himalaya regions > 0.05"
+    },
+    {
+      "name": "surge_type",
+      "source": "data_archive/prepared/exclusions/surge_exclusion/excluded_surge_glaciers.json",
+      "sha256": "ac3ea871654eda658da443e6ba87e131b07b0f3c8d3ed20a3e89840db3d939f4",
+      "criterion": "interior point of the study outline within any GAMDAM-v2 HMA surging-glacier inventory polygon (classes Verified, Probable, Possible) OR RGI 6.0 Surging in {1, 2, 3}"
+    }
+  ],
+  "excluded": [
+    {
+      "rgiid": "RGI60-15.06977",
+      "group": "train",
+      "rgi6_area_km2": 52.0294,
+      "share_outside_study_regions": 0.9978,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.07374",
+      "group": "train",
+      "rgi6_area_km2": 24.7217,
+      "share_outside_study_regions": 0.9974,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.06961",
+      "group": "train",
+      "rgi6_area_km2": 11.6415,
+      "share_outside_study_regions": 0.9925,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.02710",
+      "group": "val",
+      "rgi6_area_km2": 3.4015,
+      "share_outside_study_regions": 0.9705,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.02842",
+      "group": "train",
+      "rgi6_area_km2": 1.075,
+      "share_outside_study_regions": 0.8993,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.07112",
+      "group": "test",
+      "rgi6_area_km2": 7.2576,
+      "share_outside_study_regions": 0.8486,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.10471",
+      "group": "train",
+      "rgi6_area_km2": 1.8729,
+      "share_outside_study_regions": 0.7495,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-14.12302",
+      "group": "test",
+      "rgi6_area_km2": 0.3405,
+      "share_outside_study_regions": 0.6884,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.02730",
+      "group": "train",
+      "rgi6_area_km2": 0.1826,
+      "share_outside_study_regions": 0.5576,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.02716",
+      "group": "train",
+      "rgi6_area_km2": 0.226,
+      "share_outside_study_regions": 0.3659,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-14.12306",
+      "group": "test",
+      "rgi6_area_km2": 0.1918,
+      "share_outside_study_regions": 0.3306,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-14.12299",
+      "group": "train",
+      "rgi6_area_km2": 0.1029,
+      "share_outside_study_regions": 0.303,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.02911",
+      "group": "train",
+      "rgi6_area_km2": 7.5322,
+      "share_outside_study_regions": 0.2627,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.07357",
+      "group": "train",
+      "rgi6_area_km2": 0.1523,
+      "share_outside_study_regions": 0.2038,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-14.12293",
+      "group": "train",
+      "rgi6_area_km2": 0.429,
+      "share_outside_study_regions": 0.1881,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-15.02827",
+      "group": "val",
+      "rgi6_area_km2": 0.5719,
+      "share_outside_study_regions": 0.1841,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-14.12305",
+      "group": "train",
+      "rgi6_area_km2": 0.1941,
+      "share_outside_study_regions": 0.1702,
+      "reason": "boundary_clipped"
+    },
+    {
+      "rgiid": "RGI60-13.01428",
+      "group": "train",
+      "inventory_class": NaN,
+      "inventory_id": NaN,
+      "rgi_surging": 3,
+      "by_inventory": false,
+      "by_rgi_flag": true,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-13.01430",
+      "group": "val",
+      "inventory_class": NaN,
+      "inventory_id": NaN,
+      "rgi_surging": 2,
+      "by_inventory": false,
+      "by_rgi_flag": true,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-13.01432",
+      "group": "val",
+      "inventory_class": "Verified",
+      "inventory_id": "G0951444E296966N",
+      "rgi_surging": 2,
+      "by_inventory": true,
+      "by_rgi_flag": true,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-13.01436",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0950323E296235N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.12253",
+      "group": "val",
+      "inventory_class": "Verified",
+      "inventory_id": "G0778014E320390N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.15896",
+      "group": "train",
+      "inventory_class": "Probable",
+      "inventory_id": "G0766612E326052N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.18141",
+      "group": "val",
+      "inventory_class": "Verified",
+      "inventory_id": "G0764681E333070N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.19064",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746992E353625N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.19339",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0747814E356543N",
+      "rgi_surging": 0,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.19342",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746992E353625N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.19394",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0745596E352048N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.19942",
+      "group": "test",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746167E353136N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.19948",
+      "group": "train",
+      "inventory_class": "Probable",
+      "inventory_id": "G0745413E352552N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20029",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746361E352262N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20030",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746863E352819N",
+      "rgi_surging": 3,
+      "by_inventory": true,
+      "by_rgi_flag": true,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20031",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746863E352819N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20033",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746863E352819N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20137",
+      "group": "train",
+      "inventory_class": "Probable",
+      "inventory_id": "G0745413E352552N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20139",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746167E353136N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20145",
+      "group": "train",
+      "inventory_class": "Probable",
+      "inventory_id": "G0745281E352994N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20146",
+      "group": "train",
+      "inventory_class": "Probable",
+      "inventory_id": "G0745413E352552N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20154",
+      "group": "val",
+      "inventory_class": "Probable",
+      "inventory_id": "G0745413E352552N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20155",
+      "group": "train",
+      "inventory_class": "Probable",
+      "inventory_id": "G0745413E352552N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20156",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746167E353136N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.20210",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0746361E352262N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.26964",
+      "group": "val",
+      "inventory_class": "Possible",
+      "inventory_id": "G0796706E309893N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.26965",
+      "group": "train",
+      "inventory_class": "Possible",
+      "inventory_id": "G0796706E309893N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-14.26971",
+      "group": "train",
+      "inventory_class": "Possible",
+      "inventory_id": "G0796706E309893N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-15.01140",
+      "group": "val",
+      "inventory_class": "Verified",
+      "inventory_id": "G0951219E296238N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-15.01152",
+      "group": "val",
+      "inventory_class": "Verified",
+      "inventory_id": "G0951219E296238N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-15.01587",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0926902E279210N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-15.03206",
+      "group": "test",
+      "inventory_class": "Verified",
+      "inventory_id": "G0881719E276392N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-15.03243",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0881719E276392N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    },
+    {
+      "rgiid": "RGI60-15.10723",
+      "group": "train",
+      "inventory_class": "Verified",
+      "inventory_id": "G0903800E281648N",
+      "rgi_surging": 9,
+      "by_inventory": true,
+      "by_rgi_flag": false,
+      "reason": "surge_type"
+    }
+  ]
+}

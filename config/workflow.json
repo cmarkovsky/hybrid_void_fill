@@ -1,0 +1,40 @@
+{
+  "description": "Default manuscript workflow: 1,754 evaluated test glaciers, excluding RGI60-14.17287. Training and validation memberships are unchanged. Outputs are written below derived/manuscript/.",
+  "paths": {
+    "cube": "prepared/hma_cube_aligned.zarr",
+    "chips": "prepared/voids_aligned/chips",
+    "metadata": "prepared/voids_aligned/metadata/void_metadata_verified.parquet",
+    "attributes": "prepared/glacier_attributes/v4_native_missing_glacier_attributes.csv",
+    "split": "@repo/data/metadata/splits/evaluation_split.json",
+    "rows": "prepared/rows_context_v3_excl_surge",
+    "constant": "predictions/baselines/constant_local_mean/run_0",
+    "hypsometric": "predictions/baselines/hypsometric_local_mean/run_0",
+    "xgb": "runs/production_result_tree_1755/v3_excl_surge/xgb_rc_nodebris",
+    "cache": "derived/manuscript/cache/common_xy_point_predictions.parquet",
+    "pixel_summaries": "derived/manuscript/pixel_summaries",
+    "glacier_metrics": "derived/manuscript/glacier_wide_metrics",
+    "comparison": "derived/manuscript/glacier_wide_comparison",
+    "bootstrap": "derived/manuscript/spatial_block_bootstrap",
+    "figures": "derived/manuscript/figures",
+    "glacier_shapes": "raw/study_outlines/hma_rgi_ltg_filt.shp",
+    "region_shapes": "raw/himap/himap_regions.gpkg",
+    "raw_metadata": "prepared/voids_frozen/metadata/void_metadata.parquet",
+    "frozen_chips": "prepared/voids_frozen/chips"
+  },
+  "missing_predictors": "error",
+  "context_features": true,
+  "debris_features": false,
+  "context_neighbor_rule": "v3",
+  "require_cube_content_manifest": true,
+  "bootstrap": {
+    "block_sizes_km": [
+      50,
+      100,
+      200
+    ],
+    "primary_block_size_km": 100,
+    "n_bootstrap": 2000,
+    "seed": 20260917
+  },
+  "training": {}
+}

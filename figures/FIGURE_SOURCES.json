@@ -1,0 +1,184 @@
+{
+  "main/fig01_study_area.png": {
+    "figure": "Fig. 1",
+    "population": "full production split: 11,685 study glaciers in all groups (exclusion not applicable)",
+    "source_script": "workflow/src/void_fill/06_figures/01_fig1_study_area_map.py",
+    "sha256": "4d01f0c4a621180fb5f652ecd593fc743218ca8c738a9837e2d1dc4fbb458d6c",
+    "bytes": 549583
+  },
+  "main/fig01_study_area.pdf": {
+    "figure": "Fig. 1",
+    "population": "full production split: 11,685 study glaciers in all groups (exclusion not applicable)",
+    "source_script": "workflow/src/void_fill/06_figures/01_fig1_study_area_map.py",
+    "sha256": "84831d1960777147263f51818c148398947ba3385f4dff2f1b2b68fa156217c8",
+    "bytes": 4941589
+  },
+  "main/fig02_distributions.png": {
+    "figure": "Fig. 2",
+    "population": "train 8,179 and validation 1,751 assigned glaciers; test panels evaluated 1,754",
+    "source_script": "analysis/manuscript/figures/fig02_distributions.py",
+    "sha256": "b3b60f606f99fa482faa746400cb1019c69590274e92b0e5c90678b873634b4c",
+    "bytes": 542421
+  },
+  "main/fig02_distributions.pdf": {
+    "figure": "Fig. 2",
+    "population": "train 8,179 and validation 1,751 assigned glaciers; test panels evaluated 1,754",
+    "source_script": "analysis/manuscript/figures/fig02_distributions.py",
+    "sha256": "913e29674ff3e942e0818e77d9303c04c25c7e29965db3089305f236a81cb5e5",
+    "bytes": 63609
+  },
+  "main/fig03_pixel_residuals.png": {
+    "figure": "Fig. 3",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; 2,540,722 targets per method",
+    "source_script": "analysis/manuscript/figures/fig03_residuals.py",
+    "sha256": "5cddee46ee94a3d3df8d862d856bd2827de14cd8f56e662d523e1acebe3ee97c",
+    "bytes": 759444
+  },
+  "main/fig03_pixel_residuals.pdf": {
+    "figure": "Fig. 3",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; 2,540,722 targets per method",
+    "source_script": "analysis/manuscript/figures/fig03_residuals.py",
+    "sha256": "8d03da0423876b7916da54f3f0400d60e90f2cf0b3d79a14dbff9ca5b111cab3",
+    "bytes": 110250
+  },
+  "main/fig04_bootstrap_contrasts.png": {
+    "figure": "Fig. 4",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; 100 km blocks, 2,000 draws, seed 20260917",
+    "source_script": "workflow/src/void_fill/06_figures/04_fig4_spatial_bootstrap.py --xlim-scope row",
+    "sha256": "c7ee1231e41eb5e4337be875c6526ba816a6fd03f46b22db0ecc026dfe442db7",
+    "bytes": 235514
+  },
+  "main/fig04_bootstrap_contrasts.pdf": {
+    "figure": "Fig. 4",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; 100 km blocks, 2,000 draws, seed 20260917",
+    "source_script": "workflow/src/void_fill/06_figures/04_fig4_spatial_bootstrap.py --xlim-scope row",
+    "sha256": "e50b81e895e16478af24a1c67feda9b60006d482974e9534eb23c503062011f7",
+    "bytes": 21251
+  },
+  "main/fig05_glacier_wide.png": {
+    "figure": "Fig. 5",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded",
+    "source_script": "analysis/manuscript/figures/fig05_glacier_wide.py (3 s.f. annotations)",
+    "sha256": "c5724a61078c178fc82ba50cc64be60c61a7b8663676a768205c93480bc5e9d2",
+    "bytes": 1581643
+  },
+  "main/fig05_glacier_wide.pdf": {
+    "figure": "Fig. 5",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded",
+    "source_script": "analysis/manuscript/figures/fig05_glacier_wide.py (3 s.f. annotations)",
+    "sha256": "fa29293655b5adbc88381c27524d5fa7aa525319cc6133394519329413ec05f0",
+    "bytes": 435385
+  },
+  "supplement/figS01_relative_improvement.png": {
+    "figure": "Fig. S1",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; 50/100/200 km blocks",
+    "source_script": "analysis/manuscript/figures/figS01_relative_improvement.py",
+    "sha256": "ca37e226ec393261567c5cb8dde39dbc4b1b325b27b7af363e9042bf46c2fd29",
+    "bytes": 219745
+  },
+  "supplement/figS01_relative_improvement.pdf": {
+    "figure": "Fig. S1",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; 50/100/200 km blocks",
+    "source_script": "analysis/manuscript/figures/figS01_relative_improvement.py",
+    "sha256": "8ac70c1aad4eb4d66393049aca29f8a3f444fd64442c7358fe76c9b239e97081",
+    "bytes": 40839
+  },
+  "supplement/figS02_void_realizations.png": {
+    "figure": "Fig. S2",
+    "population": "illustrative: RGI60-15.01282 and RGI60-14.16513 (geometry/metadata selection, protocol/case_selection.csv); unaffected by the exclusion",
+    "source_script": "archived geometry-selected void-realization artwork",
+    "sha256": "e0bd27b2203bcc5e19a5ffc5b22bb2e8bf8d202716d9cd1b14a15a36a903e12d",
+    "bytes": 135572
+  },
+  "supplement/figS02_void_realizations.pdf": {
+    "figure": "Fig. S2",
+    "population": "illustrative: RGI60-15.01282 and RGI60-14.16513 (geometry/metadata selection, protocol/case_selection.csv); unaffected by the exclusion",
+    "source_script": "archived geometry-selected void-realization artwork",
+    "sha256": "8519e1c0ad2551d5e63bd621252b71177d7e099dc98339443ad00ff3982dddb7",
+    "bytes": 74205
+  },
+  "supplement/figS03_reconstruction_examples.png": {
+    "figure": "Fig. S3",
+    "population": "illustrative: four geometry-selected test glaciers; unaffected by the exclusion",
+    "source_script": "analysis/manuscript/figures/figS03_reconstruction_examples.py",
+    "sha256": "823a8fc73429f6427815bfb3bb40268a8c73867a58db7afd686dc4ee82e1a99f",
+    "bytes": 587648
+  },
+  "supplement/figS03_reconstruction_examples.pdf": {
+    "figure": "Fig. S3",
+    "population": "illustrative: four geometry-selected test glaciers; unaffected by the exclusion",
+    "source_script": "analysis/manuscript/figures/figS03_reconstruction_examples.py",
+    "sha256": "6ff9e6a02bb92181063ebed01ee3b8c6c1525e3e8cc1cd7e7c8bde68f87ec5f8",
+    "bytes": 192194
+  },
+  "supplement/figS04_band_diagnostics.png": {
+    "figure": "Fig. S4",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded",
+    "source_script": "analysis/manuscript/supplement_figures.py band_figure",
+    "sha256": "ca2d59a7dc299bc8e6dbf071f7ae54fb5651344dd4a7280644ba753d9017078e",
+    "bytes": 157057
+  },
+  "supplement/figS04_band_diagnostics.pdf": {
+    "figure": "Fig. S4",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded",
+    "source_script": "analysis/manuscript/supplement_figures.py band_figure",
+    "sha256": "5960b1550a2297430731eebc689857f00d7c6f3cfb82fdd38018d697dfdd5942",
+    "bytes": 19509
+  },
+  "supplement/figS05_realization_geometry.png": {
+    "figure": "Fig. S5",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; original geometry tertiles",
+    "source_script": "analysis/manuscript/supplement_figures.py realization_figure",
+    "sha256": "454cbb1ddaf2998f0ec21dbb6af7b4b8d00db75c6ad642e32eba56155dd98c07",
+    "bytes": 326031
+  },
+  "supplement/figS05_realization_geometry.pdf": {
+    "figure": "Fig. S5",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; original geometry tertiles",
+    "source_script": "analysis/manuscript/supplement_figures.py realization_figure",
+    "sha256": "d63ef472208893e1fd2dce28e6681fd6a06bfc39dd9ff7f0f2c8bfcd5e379fad",
+    "bytes": 23162
+  },
+  "supplement/figS06_transfer_separation_map.png": {
+    "figure": "Fig. S6",
+    "population": "1,000 + 1,000 source glaciers; evaluated test glaciers; excluded glacier marked",
+    "source_script": "analysis/manuscript/supplement_figures.py transfer_map",
+    "sha256": "b9b4ff6d2f2d1354996943925dcec2116edf85d7a36255dfd5186ec928a67114",
+    "bytes": 287723
+  },
+  "supplement/figS06_transfer_separation_map.pdf": {
+    "figure": "Fig. S6",
+    "population": "1,000 + 1,000 source glaciers; evaluated test glaciers; excluded glacier marked",
+    "source_script": "analysis/manuscript/supplement_figures.py transfer_map",
+    "sha256": "0de0cfed8328e5126486fe97c203289ed08a06b81ed475409b0cdc663987f4a2",
+    "bytes": 72223
+  },
+  "supplement/figS07_coordinate_per_glacier.png": {
+    "figure": "Fig. S7",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; full data range",
+    "source_script": "analysis/manuscript/supplement_figures.py coordinate_figures",
+    "sha256": "d3d1ad58decb58fe2b2f6d4d9baffd7a3c446a28f71cc08bf5599c65460c079e",
+    "bytes": 203910
+  },
+  "supplement/figS07_coordinate_per_glacier.pdf": {
+    "figure": "Fig. S7",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; full data range",
+    "source_script": "analysis/manuscript/supplement_figures.py coordinate_figures",
+    "sha256": "ae7bd01d326efa3de9f74bc19927ade275742674f26e52c7840cc8f6eb457edd",
+    "bytes": 45451
+  },
+  "supplement/figS08_coordinate_intervals.png": {
+    "figure": "Fig. S8",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; sequential RNG seed 20261019",
+    "source_script": "analysis/manuscript/supplement_figures.py coordinate_figures",
+    "sha256": "80297a230442b782070ba96cc018929614348da6b6ae4762a23c2d6d87996364",
+    "bytes": 195008
+  },
+  "supplement/figS08_coordinate_intervals.pdf": {
+    "figure": "Fig. S8",
+    "population": "evaluated test population: 1,754 glaciers (1,422 W, 332 E), RGI60-14.17287 excluded; sequential RNG seed 20261019",
+    "source_script": "analysis/manuscript/supplement_figures.py coordinate_figures",
+    "sha256": "624677283ba05b91664613660b5e1abb3477cc6bb0bd51d0cd345dd2dd829ff6",
+    "bytes": 24219
+  }
+}
