@@ -12,4 +12,4 @@ The archive contains the reference dh/dt raster, Copernicus DEM tiles, RGI/study
 | Copernicus GLO-30 DEM | https://doi.org/10.5069/G9028PQB |
 | RGI 6.0 glacier outlines | https://doi.org/10.7265/4M1F-GD79 |
 
-`data/metadata/DATA_SOURCES.csv` contains the required input registry, packaged locations, hashes, grid information, and recorded source/redistribution status. It omits private original machine paths. Original acquisition details are incomplete for some inputs, and no code/model licence or data-deposition identifier was supplied; none has been invented here.
+
